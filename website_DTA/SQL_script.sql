@@ -63,7 +63,7 @@ create table message (
 
 
 insert into survey ( Category, Title, ImagePath, IdAuthor, Description, DateDebut, DateFin) values
-	("Films","Quel est le meilleur film de 2019","images/top-films.jpg",1,
+	("Films","Quel est le meilleur film de 2019 ?","images/top-films.jpg",1,
 	"L'année 2019 a été riche en chefs d'oeuvres du cinéma... Cependant il est l'heure d'élire ceux qui vous ont le plus plût ! Donnez vôtre avis ici !",
 	"2019-12-28","2021-05-15"),
 	("Books","Quel est le meilleur livre de 2019 ?","images/top-livres.png",1,"Guillaume Musso, Stieg Larsson ou David Lagercrantz...Quel auteur vous a le 
@@ -107,13 +107,13 @@ insert into choice (IdSurvey, Title, ImagePath, IdAuthor, AuthorDescription, Alt
 
 	
 
-	(2,"Nomadland","images/nomadland.jpg",1,null,"Les mensonges et la folle cupidité des banquiers (autrement nommée « crise des subprimes ») les ont jetés à la rue. En 2008, ils ont perdu leur travail,
+	(2,"Nomadland","images/nomadland.jpg",1,"Insérer description","Les mensonges et la folle cupidité des banquiers (autrement nommée « crise des subprimes ») les ont jetés à la rue. En 2008, ils ont perdu leur travail,
 	leur maison, tout l’argent patiemment mis de côté pour leur retraite. Ils auraient pu rester sur place, à tourner en rond, en attendant des jours meilleurs. Ils ont préféré investir leurs derniers dollars 
 	et toute leur énergie dans l’aménagement d’un van, et les voilà partis. Ils sont devenus des migrants en étrange pays, dans leur pays lui-même, l’Amérique dont le rêve a tourné au cauchemar.
 	Parfois, ils se reposent dans un paysage sublime ou se rassemblent pour un vide-greniers géant ou une nuit de fête dans le désert. Mais le plus souvent, ils foncent là où l’on embauche les seniors
 	compétents et dociles : entrepôts Amazon, parcs d’attractions, campings… Parfois, ils s’y épuisent et s’y brisent."),
 
-	(2,"Sérotonine","images/serotonine.jpg",1,null,'"Mes croyances sont limitées, mais elles sont violentes. Je crois à la possibilité du royaume restreint. Je crois à l’amour" écrivait récemment Michel Houellebecq. 
+	(2,"Sérotonine","images/serotonine.jpg",1,"Insérer description",'"Mes croyances sont limitées, mais elles sont violentes. Je crois à la possibilité du royaume restreint. Je crois à l’amour" écrivait récemment Michel Houellebecq. 
 	Le narrateur de Sérotonine approuverait sans réserve. Son récit traverse une France qui piétine ses traditions, banalise ses villes, détruit ses campagnes au bord de la révolte. Il raconte sa vie d’ingénieur agronome, 
 	son amitié pour un aristocrate agriculteur (un inoubliable personnage de roman – son double inversé), l’échec des idéaux de leur jeunesse, l’espoir peut-être insensé de retrouver une femme perdue. 
 	Ce roman sur les ravages d’un monde sans bonté, sans solidarité, aux mutations devenues incontrôlables, est aussi un roman sur le remords et le regret.');

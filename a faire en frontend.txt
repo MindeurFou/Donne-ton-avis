@@ -1,0 +1,4 @@
+- Dans la page "addNewSurvey.php", l'élément "Nombre de choix maximal" ne doit être montrée que si la case "laisser la possibilité aux utilisateurs.." est cochée
+- Dans la page "addNewSurvey.php", on doit proposer 2 "items" permettant de remplir des nouvelles propositions, et il doit y avoir un bouton "+" permettant de rajouter un nouvel item vide pour que l'utilisateur le remplir en tant que 3ème proposition, etc...
+
+- Idée : On peut faire un compte administrateur qui pourra voir lorsque des nouveaux sondages ont été enregistrés, pour qu'il puisse les valider et éventuellement les compléter avant qu'ils soient publiés

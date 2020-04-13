@@ -20,6 +20,7 @@
             <h1 class="ui block header">Envie de participer à un sondage ?</h1>
 
             <div class="ui items ">
+                
                 <div class="item">
                     <div class="image">
                         <img src="images/top-films.jpg">
@@ -38,24 +39,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="item">
-                    <div class="image">
-                        <img src="images/top-livres.png">
-                    </div>
-                    <div class="content">
-                        <a class="header">Quel est le meilleur livre de 2019 ?</a>
-                        <div class="meta">
-                            <span>Créé par Tanguy</span>
-                        </div>
-                        <div class="description">
-                            <p>Guillaume Musso, Stieg Larsson ou David Lagercrantz...
-                                Quel auteur vous a le plus séduit cette année ?</p>
-                        </div>
-                        <div class="extra">
-                            Ferme dans 20 jours
-                        </div>
-                    </div>
-                </div>
+
             </div>    
 
         </section>

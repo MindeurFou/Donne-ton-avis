@@ -1,23 +1,55 @@
 <?php
 
-    $affichage = "";
-    $errormsg = "";
-    
-    $surveyTitle = "";
-    $surveyCategory = "";
-    $surveyDescription = "";
-    $startingDate = "";
-    $endingDate = "";
-    $numberParticipantsMax = 65535;
-    $nulberProposalMax = 15;
-    $otherCanPropose = false;
-    
-    
-    
-    
+    $data = [
+        "idSurvey" => 0,
+        "category" => "",
+        "title" => "",
+        "imagePath" => "",
+        "idAuthor" => 0,
+        "description" => "",
+        "dateDebut" => "",
+        "dateFin" => "",
+        "numberParticipants" => 0,
+        "numberParticipantsMax" => 65535,
+        "numberChoiceMax" => 15,
+        "othersCanPropose" => false,
+        "choices" => array(
+            
+            "idChoice" => 0,
+            "idSurvey" => 0,
+            "title" => "",
+            "imagePath" => "",
+            "idAuthor" => 0,
+            "authorDescription" => "",
+            "altDescription" => "",
+            "numberOfVotes" => 0,
+            "classementPosition" => 0
+        )
+    ];
+       
     $surveyCategories = ["Films","Books"];
 
-
+if (isset($_POST["submit"])){
+    
+    $data["category"] = trim(htmlspecialchars($_POST["category"]));
+    $data["title"] = trim(htmlspecialchars($_POST["surveyTitle"]));
+    //$data["imagePath"];
+    //$data["idAuthor"] = ?;
+    $data["description"] = trim(htmlspecialchars($_POST["surveyAuthorDescription"]));
+    $data["dateDebut"] = date_format(new DateTime("now", new DateTimeZone("Europe/London")), "Y-m-d");
+    $data["dateFin"] = htmlspecialchars($_POST["dateFin"]);
+    $data["numberParticipantsMax"] = trim(htmlspecialchars($_POST["numberParticipantsMax"]));
+    $data["numberChoiceMax"] = trim(htmlspecialchars($_POST["numberChoiceMax"]));
+    
+    if(isset($_POST["otherCanPropose"])){
+        $data["otherCanPropose"] = true;
+    } else {
+        $data["otherCanPropose"] = false;
+    }
+    
+    echo "vos données ont bien été enregistrées";
+    
+} else {
 ?>
 
 
@@ -37,15 +69,9 @@
         </style>
     </head>
     <body>
-        <header>
 
-            <div class="ui menu">
-                <div class="header item">DONNE TON AVIS</div>
-                <a class="item">Catégories</a>
-                <a class="item">Histoire du site</a>
-                <a class="item">Contact</a>
-            </div>
-        </header>
+        <?php include "header.html"; ?>
+        
         <div class="ui main text container">
             <div class="ui segment">     
                 <h1 class="ui header">Ajout d'un nouveau sondage</h1>
@@ -55,12 +81,12 @@
                         
                         <div class="field">
                             <label>Titre</label>
-                            <input type="text" name="surveyTitle" placeholder="Titre" value="<?php echo $surveyTitle; ?>" required>
+                            <input type="text" name="surveyTitle" placeholder="Titre" value="<?php echo $data["title"]; ?>" required>
                         </div>
 
                         <div class="field">
                             <label>Catégorie</label>
-                            <select class="ui fluid dropdown">
+                            <select class="ui fluid dropdown" name="category">
                                 <option value="">Catégorie</option>
                                 <?php for($i = 0; $i < count($surveyCategories); $i++){
                                     echo "<option value= '" . $surveyCategories[$i] . "'>" . $surveyCategories[$i] . "</option>";
@@ -71,7 +97,8 @@
                     
                     <div class="field">
                         <label>Description</label>
-                        <textarea name="surveyDescription" placeholder="Décrivez le but général de votre sondage, cela donnera envie aux gens d'y participer !" rows="2"></textarea>
+                        <textarea name="surveyAuthorDescription" placeholder="Décrivez le but général de votre sondage, cela donnera envie aux gens d'y participer !" rows="2"><?php 
+                            echo $data["description"]; ?></textarea>
                     </div>
 
                     <div class="two fields">
@@ -80,7 +107,7 @@
                             <div class="ui calendar">
                                 <div class="ui input left icon">
                                     <i class="calendar icon"></i>
-                                    <input type="date">
+                                    <input type="date" name="dateFin" required>
                                 </div>
                             </div>
                         </div>
@@ -89,16 +116,20 @@
                             <input type="file"  name="Image">
                         </div>
                     </div>
-
-                    <div class="field">
-                        <label>Nombre de participants maximal</label>
-                        <input  type="number" min="10" max="65535" name="numberParticipantsMax"  value="1000"></input>
-                    </div>       
-                    
+                    <div class="two fields">
+                        <div class="field">
+                            <label>Nombre de participants maximal</label>
+                            <input  type="number" min="10" max="65535" name="numberParticipantsMax"  value="1000"></input>
+                        </div>
+                        <div class="field">
+                            <label>Nombre de choix maximal</label>
+                            <input type="number" min="2" max ="20" name="numberChoiceMax" value="15"></input>
+                        </div>
+                    </div>
                     <div class="field">
                         <div class="ui checkbox">
                             <input type="checkbox" name="otherCanPropose" >
-                            <label for="edit-abo_newsletter">Laisser la possibilité aux utilisateurs de créer d'autres propositions pour le sondage</label>
+                            <label>Laisser la possibilité aux utilisateurs de créer d'autres propositions pour le sondage</label>
                         </div>
                     </div>
 
@@ -128,41 +159,11 @@
             </div>
         </div>
         
-        <footer>
-            <div class="ui inverted vertical footer segment">
-                <div class="ui container">
-                    <div class="ui stackable inverted divided equal height grid">
-                        <div class="three wide column">
-                            <h4 class="ui inverted header">A propos</h4>
-                            <div class="ui inverted link list">
-                                <a class="item" href="#">Plan du site</a>
-                                <a class="item" href="#">Contact</a>
-                                <a class="item" href="https://github.com/MindeurFou/Donne-ton-avis">Code source</a>
-                            </div>
-                        </div>
-                        
-                        <div class="three wide column">
-                        <h4 class="ui inverted header">De plus</h4>
-                            <div class="ui inverted link list">
-                                <a class="item" href="#">Plan du site</a>
-                                <a class="item" href="#">Contact</a>
-                                <a class="item" href="#">Autre chose</a>
-                            </div>
-                        </div>
-                        
-                        <div class="seven wide column">
-                            <h4 class="ui inverted header">Développement du site</h4>
-                            <p>Le site a été développé par Tanguy Pouriel et José Maria grâce au cours et aux conseils de M. Goupil
-                            que l'on remercie !</p>
-                        </div>
-                           
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <?php include "footer.html"; ?>
 
         
        
     </body>
 </html>
 
+<?php }

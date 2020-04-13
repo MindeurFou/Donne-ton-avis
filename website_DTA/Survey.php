@@ -6,6 +6,7 @@
  * @author Tanguy
  */
 
+require_once 'Choice.php';
 
 class Survey {
     
@@ -21,11 +22,16 @@ class Survey {
     private $dateFin;
     private $numberParticipants;
     private $numberParticipantsMax;
-    private $numberProposalMax;
+    private $numberChoiceMax;
     private $othersCanPropose;
-    private $choices;
     
-    public function __construct($idSurvey, $category, $title, $imagePath, $idAuthor, $description, $dateDebut, $dateFin, $numberParticipants, $numberParticipantsMax,$numberProposalMax, $otherCanPropose) {
+    private $dtaDb;
+    private $choices;
+    private $errorMsg;
+    
+    private static $timeZone = "Europe/London"; 
+    
+    /*public function __construct($idSurvey, $category, $title, $imagePath, $idAuthor, $description, $dateDebut, $dateFin, $numberParticipants, $numberParticipantsMax,$numberProposalMax, $otherCanPropose) {
         $this->idSurvey = $idSurvey;
         $this->category = $category;
         $this->imagePath = $imagePath;
@@ -39,116 +45,233 @@ class Survey {
         $this->othersCanPropose = $otherCanPropose;
         $this->choices = array();
               
+    }*/
+    
+    
+    public function __construct(array $data, $dtaDb){
+        
+        foreach ($data as $key => $value){
+            
+            $method = "set".$key;
+            
+            if(method_exists($this, $method)){
+                $this->$method($value);
+            }
+        }
+        
+        $this->dtaDb = $dtaDb;
+        $this->choices = array();
+        $this->errorMsg = "";
+        
     }
     
-    public function setIdSurvey($id){
+    public function setIdSurvey($val){
         
-        $id = (int) $id;
+        $id = (int) $val;
         
         if ($id > 0){
             $this->idSurvey = $id;
+        } else {
+            $this->errorMsg .= "Error while setting idSurvey <br>\n";
         }
     }
     
     public function setCategory($category){
-    
-        $category = (string) $category;
-        
-        if($category != ""){
+            
+        if ($this->checkString("category", $category)){
             $this->category = $category;
-        }
+        }    
+    }
+    
+    public function setTitle($title){
         
+        if($this->checkString("title", $title)){
+            $this->title = $title;
+        } 
     }
     
     public function setImagePath($imagePath){
         
-        $imagePath = (string) $imagePath;
-        
-        if($imagePath != ""){
+    //rajouter une fonction de test de l'existance de l'image dans les fichiers
+        if($this->checkString("imagePath", $imagePath )){
             $this->imagePath = $imagePath;
         }
     }
 
-    public function setIdAuthor($id) {
-        $id = (int) $id;
+    public function setIdAuthor($val) {
+        $id = (int) $val;
 
         if ($id > 0) {
             $this->idAuthor = $id;
+        } else {
+            $this->errorMsg .= "Error while setting idAuthor <br>\n";
         }
     }
     
-    public function setDescription($description){
-        
-        $description = (string) $description;
-        
-        if ($description != ""){
+    public function setDescription($description) {
+
+        if ($this->checkString("description", $description)) {
             $this->description = $description;
         }
     }
 
-    public function setDateDebut($date){
-        
-        $date = (string) date;
-        
-        $this->dateDebut = new DateTime($date);
+    public function setDateDebut($date) {
+
+        if ($this->checkString("dateDebut", $date)) {
+            try {
+
+                $this->dateDebut = new DateTime($date, new DateTimeZone(self::$timeZone));
+                
+            } catch (Exception $ex) {
+                $this->errorMsg .= "Exception handled while setting dateDebut : ". $ex->getMessage();
+            }
+        }
     }
     
-    public function setDateFin($date){
+    public function setDateFin($date) {
+
+        if ($this->checkString("dateFin", $date)) {
+            try {
+
+                $this->dateFin = new DateTime($date, new DateTimeZone(self::$timeZone));
+                
+            } catch (Exception $ex) {
+                $this->errorMsg .= "Exception handled while setting dateFin : " . $ex->getMessage();
+            }
+        }
+    }
+
+    public function setNumberParticipants($val){
         
-        $date = (string) $date;
+        $participants = (int)$val;
         
-        $this->dateFin = new DateTime($date);
+        if ($participants >= 0){
+           $this->numberParticipants = $participants; 
+        } else {
+            $this->errorMsg .= "Error while setting numberParticipants of " . $this . ". <br>\n";
+        }
+        
     }
     
-    public function setNumberParticipants($participants){
+    public function setNumberParticipantsMax($val){
         
-        $participants = (int)$participants;
+        $participantsMax = (int) $val;
         
-        $this->numberParticipants = $participants;
+        if ($participantsMax > 0 ){
+            $this->numberParticipantsMax = $participantsMax;
+        } else {
+            $this->errorMsg .= "Error while setting numberParticipantsMax of " . $this . ". <br>\n";
+        }
+        
     }
-    
-    public function setNumberParticipantsMax($participantsMax){
+
+    public function setNumberChoiceMax($val) {
+
+        $numberChoiceMax = (int) $val;
         
-        $participantsMax = (int) $participantsMax;
-        
-        $this->numberParticipantsMax = $participantsMax;
+        if ($numberChoiceMax > 0){
+            $this->numberChoiceMax = $numberChoiceMax;
+        } else {
+            $this->errorMsg .= "Error while setting numberChoiceMax of " . $this . ". <br>\n"; 
+        }
     }
-    
+
     public function setOthersCanPropose($othersCanPropose) {
         
-        $othersCanPropose = (boolean) $othersCanPropose;
-        
-        $this->othersCanPropose = $othersCanPropose;
+        if ($othersCanPropose == 0){
+            $this->othersCanPropose = false;
+        } else {
+            $this->othersCanPropose = true;
+        }
     }
     
-    public function setChoices($choices){
-        
-        $choices = (array) $choices;
+
+    
+    public function setChoices(array $choices){
         
         $this->choices = $choices;     
     }
     
     
-}
-
-try{
     
-    $dtaDb = new PDO("mysql:host=localhost;dbname=dtadb;charset=utf8","root","");
-   
-} catch (Exception $e) {
-    die("Erreur : " . $e->getMessage());
-}
-    
-$request = $dtaDb->query("select * from survey");
-
-while($data = $request->fetch(PDO::FETCH_ASSOC)){
-    
-    foreach ($data as $value){
-       echo ($value . "\n<br>"); 
+    public function loadChoices(){
+        
+        $request = $this->dtaDb->query("select * from choice where IdSurvey = ". $this->idSurvey);
+        
+        while ($data = $request->fetch(PDO::FETCH_ASSOC)){
+            
+            $obj = new Choice($data);
+            
+            $this->choices[] = $obj;
+        }
+        
+                
     }
-    echo '<br>';
+    
+    public function toString() {
+
+        $stringObject = "";
+        
+        $stringObject .= "idSurvey = ". $this->idSurvey . "<br>\n";
+        $stringObject .= "category = ". $this->category . "<br>\n";
+        $stringObject .= "title = ". $this->title . "<br>\n";
+        $stringObject .= "imagePath = ". $this->imagePath ."<br>\n";
+        $stringObject .= "idAuthor = ".$this->idAuthor ."<br>\n";
+        $stringObject .= "description = " . $this->description ."<br>\n";
+        $stringObject .= "dateDebut = ". date_format($this->dateDebut, 'Y-m-d') . "<br>\n";
+        $stringObject .= "dateFin = ". date_format($this->dateFin, 'Y-m-d') . "<br>\n";
+        $stringObject .= "numberParticipants = ". $this->numberParticipants."<br>\n";
+        $stringObject .= "numberParticpantsMax = ". $this->numberParticipantsMax. "<br>\n";
+        $stringObject .= "numberChoiceMax = ". $this->numberChoiceMax. "<br>\n";
+        $stringObject .= "othersCanPropose = " . ($this->othersCanPropose == true ? "true" : "false") ."<br>\n";
+        $stringObject .= "choices = ";
+        
+        foreach($this->choices as $value){
+            $stringObject .= $value->toString() . "<br>\n";
+        }
+
+        return $stringObject;
+    }
+
+    public function checkString($key, $value) {
+
+        if(is_string($value)){
+            if($value != ""){
+                return true;
+            } else {
+                $this->errorMsg .= "Error while setting ".$key.", var is empty <br>\n";
+                return false;
+            }
+            
+        } else {
+            $this->errorMsg .= "Error while setting ".$key.", var needs to be a string<br>\n";
+            return false;
+        }
+        
+    }
     
 }
+
+
+/*try {
+    $dtaDb = new PDO("mysql:host=localhost;dbname=dtadb;charset=utf8", "root", "");
+} catch (Exception $ex) {
+}
+
+$request = $dtaDb->query("select * from survey ");
+
+while ($data = $request->fetch(PDO::FETCH_ASSOC)) {
+
+    $obj = new Survey($data);
+
+    $list[] = $obj;
+    
+    echo $obj;
+}
+*/
+
+
+
 
 
 
