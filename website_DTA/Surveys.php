@@ -32,20 +32,7 @@ class Surveys {
     }
     
     
-    //loading without the choices related to the surveys
-    public function loadSurveys($startNumber, $endNumber) {
-        
-        $request = $this->dtaDb->query("select * from survey limit ". $startNumber. ", " .$endNumber);
 
-        while ($data = $request->fetch(PDO::FETCH_ASSOC)) {
-
-            $obj = new Survey($data, $this->dtaDb);
-            
-            $this->list[] = $obj;
-           
-        }
-    }
-    
     public function getDtaDb() {
         return $this->dtaDb;
     }

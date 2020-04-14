@@ -10,7 +10,7 @@ require_once 'Choice.php';
 
 class Survey {
     
-    public const categories = array(1,2);
+    public static $categories = array("Films","Books");
     
     private $idSurvey;
     private $category;
@@ -25,7 +25,6 @@ class Survey {
     private $numberChoiceMax;
     private $othersCanPropose;
     
-    private $dtaDb;
     private $choices;
     private $errorMsg;
     
@@ -48,7 +47,7 @@ class Survey {
     }*/
     
     
-    public function __construct(array $data, $dtaDb){
+    public function __construct(array $data){
         
         foreach ($data as $key => $value){
             
@@ -59,7 +58,6 @@ class Survey {
             }
         }
         
-        $this->dtaDb = $dtaDb;
         $this->choices = array();
         $this->errorMsg = "";
         
@@ -194,19 +192,7 @@ class Survey {
     
     
     
-    public function loadChoices(){
-        
-        $request = $this->dtaDb->query("select * from choice where IdSurvey = ". $this->idSurvey);
-        
-        while ($data = $request->fetch(PDO::FETCH_ASSOC)){
-            
-            $obj = new Choice($data);
-            
-            $this->choices[] = $obj;
-        }
-        
-                
-    }
+
     
     public function toString() {
 
@@ -269,6 +255,7 @@ while ($data = $request->fetch(PDO::FETCH_ASSOC)) {
     echo $obj;
 }
 */
+
 
 
 
