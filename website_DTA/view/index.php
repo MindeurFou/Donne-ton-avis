@@ -1,3 +1,20 @@
+<?php 
+define('__ROOT__', dirname(__DIR__));
+
+require_once __ROOT__.'/model/SurveyManager.php';
+
+
+//Disons qu'on veuille afficher sur notre page d'index les dix premiers sondages donnés par la db : 
+
+$surveys = $surveyManager->getSurveys(1,10); // C'est un tableau de sondages
+
+//Il faut maintenant les afficher sur la page HTML
+
+?>
+
+
+
+
 <!DOCTYPE html>
 
 <html>
@@ -23,7 +40,8 @@
                 
                 <div class="item">
                     <div class="image">
-                        <img src="images/top-films.jpg">
+                        <img src="<?php echo __ROOT__ ?>/images/top-films.jpg">
+                       
                     </div>
                     <div class="content">
                         <a class="header" href="pageSurvey.html">Quel est le meilleur film de 2019 ?</a>

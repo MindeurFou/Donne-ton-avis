@@ -6,15 +6,15 @@ create table survey (
 	IdSurvey bigint(20) not null auto_increment,
 	Category varchar(150) not null,
 	Title varchar(100) not null,
-	ImagePath varchar(100),
+	ImagePath varchar(100) default null,
 	IdAuthor bigint(20) not null,
 	Description text not null,
 	DateDebut date not null,
-	DateFin date,
+	DateFin date default null,
 	NumberParticipants smallint default 0,
 	NumberParticipantsMax smallint default 2000,
 	NumberChoiceMax smallint default 15,
-	OthersCanPropose boolean default false,
+	OthersCanPropose tinyint(1) default 0,
 
 	primary key (IdSurvey)
 
@@ -31,7 +31,7 @@ create table choice (
 	AuthorDescription text,
 	AltDescription text,
 	NumberOfVotes int default 0,
-	ClassementPosition smallint default null,
+	ClassementPosition smallint default 0,
 
 	primary key (IdChoice)
 	

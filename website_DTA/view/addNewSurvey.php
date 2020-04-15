@@ -1,8 +1,10 @@
 <?php
-require_once 'SurveyManager.php';
+define('__ROOT__', dirname(__DIR__));
+
+require_once __ROOT__.'/model/SurveyManager.php';
 
 $data = [
-    "idSurvey" => 0,
+    
     "category" => "",
     "title" => "",
     "imagePath" => "",
@@ -82,8 +84,9 @@ if (isset($_POST["submit"])) {
 
     /* foreach ($data as $key => $value){
       echo $key . " : " .$value. " de type : ". gettype($value). "<br>\n";
-      } */
+      } */ 
 
+    //si tout s'est bien passé, on ajoute le sondage dans la base de données et on retourne sur la page d'index
     if (empty($errorMsg)) {
         $surveyManager->addSurveyByArray($data);
         header("Location: index.php");

@@ -33,6 +33,10 @@ class Choice {
         }
     }
     
+    public function addAVote(){
+        $this->numberOfVotes++;
+    }
+    
     public function setIdChoice($val){
         
         $id = (int) $val;

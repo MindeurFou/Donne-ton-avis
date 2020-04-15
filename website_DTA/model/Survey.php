@@ -63,6 +63,11 @@ class Survey {
         
     }
     
+    
+    public function updateClassement(){
+        //insérer un algo de tri
+    }
+    
     public function setIdSurvey($val){
         
         $id = (int) $val;
@@ -189,9 +194,6 @@ class Survey {
         
         $this->choices = $choices;     
     }
-    
-    
-    
 
     
     public function toString() {
@@ -222,7 +224,7 @@ class Survey {
     public function checkString($key, $value) {
 
         if(is_string($value)){
-            if($value != ""){
+            if(!empty($value)){
                 return true;
             } else {
                 $this->errorMsg .= "Error while setting ".$key.", var is empty <br>\n";

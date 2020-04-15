@@ -1,9 +1,21 @@
+<?php 
+
+require_once 'SurveyManager.php';
+require_once 'WebsiteUserManager.php';
+
+//Par exemple disons qu'on veut charger le sondage d'id = 2, on est arrivé sur cette page depuis la page d'index ou on avait chargé plusieurs sondages sous formes d'objets
+// on a notre objet $survey, il faut faire :
+
+/*
+ * $choices = $surveyManager->getChoicesOfSurvey($survey->idSurvey);
+ * $survey->setChoices($choices);
+*/
+
+// Il faut maintenant charger ces "choices" dans la page HTML
+?>
+
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <html>
     <head>
         <title>Sondage DTA</title>
@@ -19,6 +31,7 @@ and open the template in the editor.
         <script src="semantic.min.js"></script>
         <script>$(document).ready(function() {$(".rating").rating();});</script>
     </head>
+    
     <body>
         
         <?php include "header.html"; ?>
@@ -66,3 +79,5 @@ and open the template in the editor.
         
     </body>
 </html>
+
+
