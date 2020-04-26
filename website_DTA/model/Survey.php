@@ -51,7 +51,7 @@ class Survey {
         
         foreach ($data as $key => $value){
             
-            $method = "set".$key;
+            $method = "set" . $key;
             
             if(method_exists($this, $method)){
                 $this->$method($value);
@@ -64,8 +64,30 @@ class Survey {
     }
     
     
-    public function updateClassement(){
-        //insérer un algo de tri
+    public function updateClassement(){ 
+        
+       function comparator($choice1, $choice2){  //fonction utilisée pour comparer les nombres de vote des choix
+           if ($choice1->getNumberOfVotes() == $choice2->getNumberOfVotes()){
+               return 0;
+           } else {
+               return $choice1->getNumberOfVotes() > $choice2->getNumberOfVotes() ? -1 : 1;
+           }         
+       }
+       
+       usort($this->choices, "comparator"); 
+       
+       for ($i = 0; $i < count($this->choices) ; $i++){  // attribution des classements en fonction du nombre de vote
+           
+           if ($i == 0){ // si c'est le premier on lui donne la première place
+               $this->choices[0]->setClassementPosition(1);
+           }
+           else if($this->choices[$i]->getNumberOfVotes() == $this->choices[$i - 1]->getNumberOfVotes() ){ // si ex-aequo, on donne le même classement que le choix précédent
+               $this->choices[$i]->setClassementPosition($this->choices[$i-1]->getClassementPosition());
+           } else {
+               $this->choices[$i]->setClassementPosition($this->choices[$i-1]->getClassementPosition() +1); // sinon, on donne la position juste derrière celui qui le précède
+           }
+           
+       }
     }
     
     public function setIdSurvey($val){
@@ -257,6 +279,9 @@ while ($data = $request->fetch(PDO::FETCH_ASSOC)) {
     echo $obj;
 }
 */
+
+
+
 
 
 

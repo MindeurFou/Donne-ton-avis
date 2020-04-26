@@ -117,6 +117,14 @@ class Choice {
        }
     }
     
+    public function getNumberOfVotes(){
+        return $this->numberOfVotes;
+    }
+    
+    public function getClassementPosition(){
+        return $this->classementPosition;
+    }
+    
     
     public function toString(){
         
