@@ -44,10 +44,22 @@ class SurveyManager {
         return $list;
     }
     
-    public function getSurveyById(int $id){
+    public function getSurveyById(int $id) {
         
+        $query = $this->dtaDb->prepare("select * from survey where IdSurvey = :idSurvey");
+        $query->bindValue(":idSurvey", $id);
+
+        try {
+            $query->execute();
+        } catch (PDOException $ex) {
+            $this->errorMsg .= "Exception handled while calling getSurveyById() : " . $ex->getMessage();
+        }
+
+        $obj = new Survey($query->fetch());
+
+        return $obj;
     }
-    
+
     public function updateChoicesOfSurvey(Survey $survey){
         
         $query = $this->dtaDb->prepare("update choice set Title = :title , AuthorDescription = :authorDescription , AltDescription = :altDescription"
