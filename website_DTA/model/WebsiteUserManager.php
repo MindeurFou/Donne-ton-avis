@@ -11,10 +11,12 @@ require_once 'WebsiteUser.php';
 class WebsiteUserManager {
     
     private $dtaDb;
+    private $errorMsg;
     
     public function __construct($dtaDb) {
         
         $this->dtaDb = $dtaDb;
+        $this->errorMsg = "";
     }
     
     public function addUserByArray(array $data){
@@ -31,23 +33,28 @@ class WebsiteUserManager {
         try{
             $query->execute();
         } catch (PDOException $ex) {
-            echo $ex;
+            $this->errorMsg .= "Exception handled while calling addUserByArray() : ".$ex;
         }
         
         
         return $this->dtaDb->query("SELECT IdUser FROM websiteUser ORDER BY IdUser DESC LIMIT 1"); // renvoie l'id de l'utilisateur créé
     }
     
-   public function getUserById(int $id){
-       
-       $query = $this->dtaDb->prepare("select * from websiteUser where IdUser = :idUser");
-       $query->bindValue(":idUser", $id);     
-       $query->execute();
-       
-       $obj = new WebsiteUser($query->fetch());
-       
-       return $obj;
-   } 
+   public function getUserById(int $id) {
+
+        $query = $this->dtaDb->prepare("select * from websiteUser where IdUser = :idUser");
+        $query->bindValue(":idUser", $id);
+
+        try {
+            $query->execute();
+        } catch (PDOException $ex) {
+            $this->errorMsg .= "Exception handled while calling getUserById() : " . $ex->getMessage();
+        }
+
+        $obj = new WebsiteUser($query->fetch());
+
+        return $obj;
+    } 
    
    public function updateUser(WebsiteUser $user){
        
@@ -61,7 +68,12 @@ class WebsiteUserManager {
        $query->bindValue(":password", $user->password);
        $query->bindValue(":idUser", $user->idUser, PDO::PARAM_INT);
        
-       $query->execute();
+       try{
+           $query->execute();
+       } catch (PDOException $ex) {
+           $this->errorMsg .= "Exception handled while calling updateUser() : ". $ex->getMessage();
+       }
+       
    }
    
     
@@ -70,7 +82,13 @@ class WebsiteUserManager {
         $query = $this->dtaDb->prepare("select * from websiteUser where UserName = :userName");
         
         $query->bindValue(":userName", $userName);
-        $query->execute();
+        
+        try{
+            $query->execute();
+        } catch (PDOException $ex) {
+            $this->errorMsg .= "Exception handled while calling isUserNameUsed() : " . $ex->getMessage();
+        }
+        
         
         $res = $query->fetch();
         
@@ -88,14 +106,15 @@ class WebsiteUserManager {
 
 try {
     $dtaDb = new PDO("mysql:host=localhost;dbname=dtadb;charset=utf8", "root", "",array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-} catch (Exception $ex) {
+} catch (PDOException $ex) {
     echo ("Exception handled while  connecting to dtadb : " . $ex->getMessage());
     exit();
 }
 
 $userManager = new WebsiteUserManager($dtaDb);
 
+/*
 $user = $userManager->getUserById(6);
 
-echo $user->toString();
+echo $user->toString();*/
 
