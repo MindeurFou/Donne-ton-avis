@@ -44,6 +44,10 @@ class SurveyManager {
         return $list;
     }
     
+    public function getSurveyById(int $id){
+        
+    }
+    
     public function updateChoicesOfSurvey(Survey $survey){
         
         $query = $this->dtaDb->prepare("update choice set Title = :title , AuthorDescription = :authorDescription , AltDescription = :altDescription"
