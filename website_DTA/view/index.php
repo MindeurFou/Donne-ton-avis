@@ -40,7 +40,7 @@ $surveys = $surveyManager->getSurveys(1,10); // C'est un tableau de sondages
                 
                 <div class="item">
                     <div class="image">
-                        <img src="<?php echo __ROOT__ ?>/images/top-films.jpg">
+                        <img src="\website_DTA/images/top-films.jpg">
                        
                     </div>
                     <div class="content">

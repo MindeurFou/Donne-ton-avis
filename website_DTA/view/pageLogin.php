@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 define('__ROOT__', dirname(__DIR__));
 
 require_once __ROOT__ . '/model/WebsiteUserManager.php';
@@ -73,8 +75,9 @@ if (isset($_POST["submit"])) {
     $data["password"] = password_hash($data["password"], PASSWORD_DEFAULT);
 
     if (empty($errorMsg)) {
-        $userManager->addUserByArray($data);
-        //header("Location : index.php");
+        $idUser = $userManager->addUserByArray($data);
+        $_SESSION["idUser"] = $idUser;
+        header("Location : index.php");
     }
 }
 

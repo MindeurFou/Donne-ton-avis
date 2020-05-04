@@ -63,21 +63,21 @@ create table message (
 
 
 insert into survey ( Category, Title, ImagePath, IdAuthor, Description, DateDebut, DateFin) values
-	("Films","Quel est le meilleur film de 2019 ?","images/top-films.jpg",1,
+	("Films","Quel est le meilleur film de 2019 ?","/website_DTA/images/top-films.jpg",1,
 	"L'année 2019 a été riche en chefs d'oeuvres du cinéma... Cependant il est l'heure d'élire ceux qui vous ont le plus plût ! Donnez vôtre avis ici !",
 	"2019-12-28","2021-05-15"),
-	("Books","Quel est le meilleur livre de 2019 ?","images/top-livres.png",1,"Guillaume Musso, Stieg Larsson ou David Lagercrantz...Quel auteur vous a le 
+	("Books","Quel est le meilleur livre de 2019 ?","/website_DTA/images/top-livres.png",1,"Guillaume Musso, Stieg Larsson ou David Lagercrantz...Quel auteur vous a le 
 	plus séduit cette année ?","2019-12-27","2021-02-03");
 
 insert into choice (IdSurvey, Title, ImagePath, IdAuthor, AuthorDescription, AltDescription) values
 	
-	(1,"Once Upon a Time in Holywood","images/once_upon_a_time_affiche.jpg",1,"Le nouveau film de Tarantino, il a fait un tabac auprès du public avec pas moins de 100 000 entrées sur les 6 
+	(1,"Once Upon a Time in Holywood","/website_DTA/images/once_upon_a_time_affiche.jpg",1,"Le nouveau film de Tarantino, il a fait un tabac auprès du public avec pas moins de 100 000 entrées sur les 6 
 	premiers mois après sa sortie... C'est pour moi un bon candidat pour le poste de meilleur film de l'année !",
 	"Once Upon a Time… in Hollywood , Il était une fois à Hollywood au Québec ou Il était une fois... à Hollywood en Belgique francophone est un film américano-britannique écrit, coproduit
 	et réalisé par Quentin Tarantino, sorti en 2019. Le film est présenté en compétition officielle lors du Festival de Cannes 2019. Salué par la critique, le film remporte 3 Goldens Globes 
 	dont le Golden Globe du meilleur film musical ou comédie en 2020. Par la suite, il est nommé 7 fois aux BAFTA 2020 et 10 fois aux Oscars." ),
 
-	(1,"Joker","images/joker_affiche.jpg",1,"Le Joker a été une vrai révélation cette année. Ce film nous a vraiment pris de court, tant il est 
+	(1,"Joker","/website_DTA/images/joker_affiche.jpg",1,"Le Joker a été une vrai révélation cette année. Ce film nous a vraiment pris de court, tant il est 
 	différent des films de héros signé Marvel que l'on a l'habitude de voir.",
 	"Joker est un thriller psychologique américain, coécrit et réalisé par Todd Phillips, sorti en 2019. 
 	Il raconte, dans une histoire originale, la transformation d'Arthur Fleck en Joker, un dangereux tueur psychopathe qui deviendra le plus grand ennemi de Batman. 
@@ -87,7 +87,7 @@ insert into choice (IdSurvey, Title, ImagePath, IdAuthor, AuthorDescription, Alt
 	meilleur film étranger, etc...). Le jeu d'acteur de Joaquin Phoenix est particulièrement salué, cette performance lui valant de nombreuses récompenses dont le Golden Globe du meilleur
 	acteur dans un film dramatique et l'Oscar du meilleur acteur. La compositrice Hildur Guðnadóttir reçoit également plusieurs prix dont le Golden Globe et l'Oscar de la meilleure musique de film. "),
 
-	(1,"Parasite","images/parasite_affiche.jpg",1,"Je n'ai pas vu ce film mais je n'ai pu m'empêcher de le rajouter aux propositions tant il a été salué par la critique et le public... A vous de 
+	(1,"Parasite","/website_DTA/images/parasite_affiche.jpg",1,"Je n'ai pas vu ce film mais je n'ai pu m'empêcher de le rajouter aux propositions tant il a été salué par la critique et le public... A vous de 
 	me convaincre de le voir en lui donnant une bonne place dans le classement !",
 	"Parasite (hangeul : 기생충 ; RR : Gisaengchung), est un film sud-coréen coécrit et réalisé par Bong Joon-ho, sorti en 2019. Le film est présenté en compétition officielle au festival 
 	de Cannes 2019, où il remporte la Palme d'or à l'unanimité du jury. Il est le premier film sud-coréen à obtenir cette récompense. C'est un immense succès critique et au box-office en 
@@ -95,7 +95,7 @@ insert into choice (IdSurvey, Title, ImagePath, IdAuthor, AuthorDescription, Alt
 	à obtenir lors de la même cérémonie l'Oscar du meilleur film et l'Oscar du meilleur film étranger (rebaptisé Oscar du meilleur film international en 2019). Avec également l'Oscar du meilleur
 	scénario original et celui du meilleur réalisateur, Bong Joon-ho devient le premier réalisateur à égaliser le record de Walt Disney, détenu en 1954, en remportant quatre Oscars la même soirée."),
 
-	(1,"Avengers : Endgame","images/avengers_endgame.jpg",1,"Dernier opus de la saga Avengers, le film était très attendu en raison du suspens laissé à la fin de Avengers : Infinity War. Il a été un
+	(1,"Avengers : Endgame","/website_DTA/images/avengers_endgame.jpg",1,"Dernier opus de la saga Avengers, le film était très attendu en raison du suspens laissé à la fin de Avengers : Infinity War. Il a été un
 	franc succès au box-office grâce à son scénario inventif mettant en scène les anciens films Marvel revu sous un autre angle",
 	"Avengers: Endgame ou Avengers : Phase finale au Québec est un film américain réalisé par Anthony et Joe Russo, sorti en 2019. Il met en scène l'équipe de super-héros des comics Marvel, les Avengers. 
 	Il s'agit du 22e film de l'Univers cinématographique Marvel, débuté en 2008 et du 10e et avant-dernier de la phase III. Ce film est la suite directe de Avengers: Infinity War à la fin duquel 
@@ -107,13 +107,13 @@ insert into choice (IdSurvey, Title, ImagePath, IdAuthor, AuthorDescription, Alt
 
 	
 
-	(2,"Nomadland","images/nomadland.jpg",1,"Insérer description","Les mensonges et la folle cupidité des banquiers (autrement nommée « crise des subprimes ») les ont jetés à la rue. En 2008, ils ont perdu leur travail,
+	(2,"Nomadland","/website_DTA/images/nomadland.jpg",1,"Insérer description","Les mensonges et la folle cupidité des banquiers (autrement nommée « crise des subprimes ») les ont jetés à la rue. En 2008, ils ont perdu leur travail,
 	leur maison, tout l’argent patiemment mis de côté pour leur retraite. Ils auraient pu rester sur place, à tourner en rond, en attendant des jours meilleurs. Ils ont préféré investir leurs derniers dollars 
 	et toute leur énergie dans l’aménagement d’un van, et les voilà partis. Ils sont devenus des migrants en étrange pays, dans leur pays lui-même, l’Amérique dont le rêve a tourné au cauchemar.
 	Parfois, ils se reposent dans un paysage sublime ou se rassemblent pour un vide-greniers géant ou une nuit de fête dans le désert. Mais le plus souvent, ils foncent là où l’on embauche les seniors
 	compétents et dociles : entrepôts Amazon, parcs d’attractions, campings… Parfois, ils s’y épuisent et s’y brisent."),
 
-	(2,"Sérotonine","images/serotonine.jpg",1,"Insérer description",'"Mes croyances sont limitées, mais elles sont violentes. Je crois à la possibilité du royaume restreint. Je crois à l’amour" écrivait récemment Michel Houellebecq. 
+	(2,"Sérotonine","/website_DTA/images/serotonine.jpg",1,"Insérer description",'"Mes croyances sont limitées, mais elles sont violentes. Je crois à la possibilité du royaume restreint. Je crois à l’amour" écrivait récemment Michel Houellebecq. 
 	Le narrateur de Sérotonine approuverait sans réserve. Son récit traverse une France qui piétine ses traditions, banalise ses villes, détruit ses campagnes au bord de la révolte. Il raconte sa vie d’ingénieur agronome, 
 	son amitié pour un aristocrate agriculteur (un inoubliable personnage de roman – son double inversé), l’échec des idéaux de leur jeunesse, l’espoir peut-être insensé de retrouver une femme perdue. 
 	Ce roman sur les ravages d’un monde sans bonté, sans solidarité, aux mutations devenues incontrôlables, est aussi un roman sur le remords et le regret.');

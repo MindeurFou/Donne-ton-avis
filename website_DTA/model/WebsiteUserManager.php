@@ -19,6 +19,12 @@ class WebsiteUserManager {
         $this->errorMsg = "";
     }
     
+    
+    /**
+     * Save a new user  into the database
+     * @param array $data the associative array matching columns of the websiteUser table
+     * @return int the id of the user you have created
+     */
     public function addUserByArray(array $data){
         
         $query = $this->dtaDb->prepare("insert into websiteUser (Username, FirstName, Name, Age, Password) values"
@@ -76,7 +82,11 @@ class WebsiteUserManager {
        
    }
    
-    
+    /**
+     * 
+     * @param string $userName the Username you want to check if exist in database
+     * @return boolean true if the user exists
+     */
     public function isUserNameUsed(string $userName){
         
         $query = $this->dtaDb->prepare("select * from websiteUser where UserName = :userName");
@@ -88,7 +98,6 @@ class WebsiteUserManager {
         } catch (PDOException $ex) {
             $this->errorMsg .= "Exception handled while calling isUserNameUsed() : " . $ex->getMessage();
         }
-        
         
         $res = $query->fetch();
         

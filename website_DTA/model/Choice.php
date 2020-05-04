@@ -125,6 +125,10 @@ class Choice {
         return $this->classementPosition;
     }
     
+    public function getIdSurvey(){
+        return $this->idSurvey;
+    }
+    
     
     public function toString(){
         

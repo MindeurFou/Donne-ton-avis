@@ -1,10 +1,11 @@
 <?php
+session_start();
+
 define('__ROOT__', dirname(__DIR__));
 
-require_once __ROOT__.'/model/SurveyManager.php';
+require_once __ROOT__ . '/model/SurveyManager.php';
 
 $data = [
-    
     "category" => "",
     "title" => "",
     "imagePath" => "",
@@ -48,9 +49,15 @@ if (isset($_POST["submit"])) {
         $errorMsg .= "Le champs titre est obligatoire<br>\n";
     } else if (strlen($data["title"]) < 2 || strlen($data["title"]) > 100) {
         $errorMsg .= "Le champs titre doit contenir entre 2 et 100 caractères<br>\n";
-    } // else if ($manager->isNewTitle($data["title"]))   
-    //$data["imagePath"];
-    $data["idAuthor"] = 1;
+    }
+
+    if ($surveyManager->isTitleUsed($data["title"])) {
+        $errorMsg .= "Le titre existe déjà :( Veuillez en choisir un autre svp<br>\n";
+    }
+    
+    $data["imagePath"] = SurveyManager::uploadImage($data["title"], "image"); 
+
+    $data["idAuthor"] = $_SESSION["idUser"];
 
 
     $data["description"] = trim(htmlspecialchars($_POST["surveyAuthorDescription"]));
@@ -82,18 +89,11 @@ if (isset($_POST["submit"])) {
     }
 
 
-    /* foreach ($data as $key => $value){
-      echo $key . " : " .$value. " de type : ". gettype($value). "<br>\n";
-      } */ 
-
     //si tout s'est bien passé, on ajoute le sondage dans la base de données et on retourne sur la page d'index
     if (empty($errorMsg)) {
         $surveyManager->addSurveyByArray($data);
         header("Location: index.php");
     }
-
-
-    
 }
 
 if (!isset($_POST["submit"]) || !empty($errorMsg)) {
@@ -113,19 +113,19 @@ if (!isset($_POST["submit"]) || !empty($errorMsg)) {
         </head>
         <body>
 
-            <?php include "header.html"; ?>
+    <?php include "header.html"; ?>
 
 
 
             <div class="ui main text container">
-                <?php
-                if (!empty($errorMsg)) {
-                    echo '<div class="ui red message">' . $errorMsg . '</div>';
-                }
-                ?>
+    <?php
+    if (!empty($errorMsg)) {
+        echo '<div class="ui red message">' . $errorMsg . '</div>';
+    }
+    ?>
                 <div class="ui segment">     
                     <h1 class="ui header">Ajout d'un nouveau sondage</h1>
-                    <form class="ui form" method="POST" action="addNewSurvey.php">
+                    <form class="ui form" enctype="multipart/form-data" method="POST" action="addNewSurvey.php">
                         <h3 class="ui dividing header">Le sondage</h3>
                         <div class="two fields">
 
@@ -138,11 +138,11 @@ if (!isset($_POST["submit"]) || !empty($errorMsg)) {
                                 <label>Catégorie</label>
                                 <select class="ui fluid dropdown" name="category">
                                     <option value="">Catégorie</option>
-                                    <?php
-                                    foreach (Survey::$categories as $value) {
-                                        echo "<option value= '" . $value . "'>" . $value . "</option>";
-                                    }
-                                    ?>
+    <?php
+    foreach (Survey::$categories as $value) {
+        echo "<option value= '" . $value . "'>" . $value . "</option>";
+    }
+    ?>
                                 </select>
                             </div>
                         </div>
@@ -164,7 +164,8 @@ if (!isset($_POST["submit"]) || !empty($errorMsg)) {
                             </div>
                             <div class="field">
                                 <label>Image associée</label>
-                                <input type="file"  name="Image">
+                                <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+                                <input type="file"  name="image">
                             </div>
                         </div>
                         <div class="two fields">
@@ -210,7 +211,7 @@ if (!isset($_POST["submit"]) || !empty($errorMsg)) {
                 </div>
             </div>
 
-            <?php include "footer.html"; ?>
+    <?php include "footer.html"; ?>
 
 
 

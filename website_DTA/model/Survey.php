@@ -216,7 +216,10 @@ class Survey {
         
         $this->choices = $choices;     
     }
-
+    
+    public function getIdSurvey(){
+        return $this->idSurvey;
+    }
     
     public function toString() {
 
