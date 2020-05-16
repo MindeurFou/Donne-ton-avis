@@ -26,6 +26,15 @@ class WebsiteUser {
             }
         }
     }
+    
+    public function getIdUser(){
+        return $this->idUser;
+    }
+    
+    
+    public function getUserName(){
+        return $this->userName;
+    }
 
     public function setIdUser($val) {
 

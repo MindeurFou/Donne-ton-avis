@@ -63,7 +63,10 @@ class Survey {
         
     }
     
-    
+    /**
+     * this function needs to be called each time an user submit a vote.
+     * It refresh the classement of the survey on which it's called
+     */
     public function updateClassement(){ 
         
        function comparator($choice1, $choice2){  //fonction utilisée pour comparer les nombres de vote des choix
@@ -90,6 +93,22 @@ class Survey {
        }
     }
     
+    /**
+     * this function needs to be called after you added a vote to a choice.
+     */
+    public function updateNumberParticipants(){
+        $numberParticipants = 0;
+        
+        foreach ($this->choices as $choice){
+            $numberParticipants += $choice->getNumberOfVotes();
+        }
+        
+        $this->numberParticipants = $numberParticipants;
+    }
+
+
+
+
     public function setIdSurvey($val){
         
         $id = (int) $val;
@@ -217,9 +236,47 @@ class Survey {
         $this->choices = $choices;     
     }
     
+    
     public function getIdSurvey(){
         return $this->idSurvey;
     }
+    
+    
+    public function getImagePath(){
+        return $this->imagePath;
+    }
+    
+    
+    public function getTitle(){
+    return $this->title;
+    }
+    
+    
+    public function getCategory(){
+        return $this->category;
+    }
+    
+    
+    public function getDateFin(){
+        return $this->dateFin;
+    }
+    
+    
+    public function getDateDebut(){
+        return $this->dateDebut;
+    }
+    
+    
+    public function getDescription(){
+        return $this->description;
+    }
+    
+    
+    public function getIdAuthor(){
+        return $this->idAuthor;
+    }
+    
+    
     
     public function toString() {
 

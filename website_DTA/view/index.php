@@ -2,6 +2,7 @@
 define('__ROOT__', dirname(__DIR__));
 
 require_once __ROOT__.'/model/SurveyManager.php';
+require_once __ROOT__.'/model/WebsiteUserManager.php';
 
 
 //Disons qu'on veuille afficher sur notre page d'index les dix premiers sondages donnés par la db : 
@@ -10,10 +11,25 @@ $surveys = $surveyManager->getSurveys(1,10); // C'est un tableau de sondages
 
 //Il faut maintenant les afficher sur la page HTML
 
+$surveysView = "";
+
+foreach ($surveys as $survey){
+    $surveysView .= "<div class=\"item\">\n";
+    $surveysView .= "<div class=\"image\">\n";
+    $surveysView .= "<img src=\"". $survey->getImagePath() ."\">";
+    $surveysView .= "\n</div>\n<div class='content' >\n";
+    $surveysView .= "<a class='header' href='pageSurvey.php'>". $survey->getTitle() ."</a>\n";
+    $surveysView .= "<div class='meta'>\n";
+    $surveysView .= "<span>Créé par ". $userManager->getUserById($survey->getIdAuthor())->getUserName()."</span>\n";
+    $surveysView .= "</div>\n";
+    $surveysView .= "<div class='description'>\n";
+    $surveysView .= "<p>". $survey->getDescription() ."</p>\n";
+    $surveysView .= "</div>\n";
+   // $surveysView .= "<div class='extra'> Date de fin du sondage : ". $survey->getDateFin() ." </div>\n";
+    $surveysView .= "</div>\n</div>\n";
+}
+
 ?>
-
-
-
 
 <!DOCTYPE html>
 
@@ -36,28 +52,8 @@ $surveys = $surveyManager->getSurveys(1,10); // C'est un tableau de sondages
 
             <h1 class="ui block header">Envie de participer à un sondage ?</h1>
 
-            <div class="ui items ">
-                
-                <div class="item">
-                    <div class="image">
-                        <img src="\website_DTA/images/top-films.jpg">
-                       
-                    </div>
-                    <div class="content">
-                        <a class="header" href="pageSurvey.html">Quel est le meilleur film de 2019 ?</a>
-                        <div class="meta">
-                            <span>Créé par Tanguy</span>
-                        </div>
-                        <div class="description">
-                            <p>L'année 2019 a été riche en chefs d'oeuvres du cinéma... Cependant
-                                il est l'heure d'élire ceux qui vous ont le plus plût ! Donnez vôtre avis ici !</p>
-                        </div>
-                        <div class="extra">
-                            Ferme dans 10 jours
-                        </div>
-                    </div>
-                </div>
-
+            <div class="ui items ">          
+                <?php $surveysView?>
             </div>    
 
         </section>

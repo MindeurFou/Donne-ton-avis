@@ -6,7 +6,7 @@
  * @author Tanguy
  */
 
-define('__ROOT__', dirname(__DIR__));
+//define('__ROOT__', dirname(__DIR__));
 
 require_once 'Survey.php';
 
@@ -55,6 +55,33 @@ class SurveyManager {
         $obj = new Survey($query->fetch());
 
         return $obj;
+    }
+    
+    public function updateSurvey(Survey $survey) {
+        
+        $query = $this->dtaDb->prepare("update survey set Category = :category, Title = :title, ImagePath = :imagePath, IdAuthor = :idAuthor, "
+                . "Description = :description, dateDebut = :dateDebut,  DateFin = :dateFin, NumberParticipants = :numberParticipants, "
+                . "NumberParticipantsMax= :numberParticipantsMax, NumberChoiceMax =:numberChoiceMax, OthersCanPropose = :othersCanPropose where IdSurvey= :idSurvey");
+        
+        $query->bindValue(":idSurvey", $survey->idSurvey, PDO::PARAM_INT);
+        $query->bindValue(":category", $survey->category);
+        $query->bindValue(":title", $survey->title);
+        $query->bindValue(":imagePath", $survey->imagePath);
+        $query->bindValue(":idAuthor", $survey->idAuthor);
+        $query->bindValue(":description", $survey->description);
+        $query->bindValue(":dateDebut", $survey->dateDebut->format('Y-m-d'));
+        $query->bindValue(":dateFin", $survey->dateFin->format('Y-m-d'));
+        $query->bindValue(":numberParticipants", $survey->numberParticipants, PDO::PARAM_INT);
+        $query->bindValue(":numberParticipantsMax", $survey->numberParticipantsMax, PDO::PARAM_INT);
+        $query->bindValue(":numberChoiceMax", $survey->numberChoiceMax, PDO::PARAM_INT);
+        $query->bindValue(":othersCanPropose", $survey->othersCanPropose, PDO::PARAM_INT);
+        
+        try{
+            $query->execute();
+        } catch (PDOException $ex) {
+            $this->errorMsg .= "Exception handled while calling updeSurvey() : ". $ex->getMessage();
+        }
+        
     }
 
     public function updateChoicesOfSurvey(Survey $survey) {

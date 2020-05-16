@@ -1,7 +1,7 @@
 <?php
-session_start();
-
 define('__ROOT__', dirname(__DIR__));
+
+include __ROOT__. '/model/authentication.php';
 
 require_once __ROOT__ . '/model/SurveyManager.php';
 
@@ -57,7 +57,7 @@ if (isset($_POST["submit"])) {
     
     $data["imagePath"] = SurveyManager::uploadImage($data["title"], "image"); 
 
-    $data["idAuthor"] = $_SESSION["idUser"];
+    $data["idAuthor"] = $user->getIdUser();
 
 
     $data["description"] = trim(htmlspecialchars($_POST["surveyAuthorDescription"]));
