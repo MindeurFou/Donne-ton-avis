@@ -2,7 +2,6 @@
 
 /**
  * Description of WebsiteUser
- *
  * @author Tanguy
  */
 class WebsiteUser {

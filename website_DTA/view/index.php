@@ -7,7 +7,7 @@ require_once __ROOT__.'/model/WebsiteUserManager.php';
 
 //Disons qu'on veuille afficher sur notre page d'index les dix premiers sondages donnés par la db : 
 
-$surveys = $surveyManager->getSurveys(1,10); // C'est un tableau de sondages
+$surveys = $surveyManager->getSurveys(0,10); // C'est un tableau de sondages
 
 //Il faut maintenant les afficher sur la page HTML
 
@@ -18,14 +18,14 @@ foreach ($surveys as $survey){
     $surveysView .= "<div class=\"image\">\n";
     $surveysView .= "<img src=\"". $survey->getImagePath() ."\">";
     $surveysView .= "\n</div>\n<div class='content' >\n";
-    $surveysView .= "<a class='header' href='pageSurvey.php'>". $survey->getTitle() ."</a>\n";
+    $surveysView .= "<a class='header' href='pageSurvey.php?idSurvey=". $survey->getIdSurvey()."'>". $survey->getTitle() ."</a>\n";
     $surveysView .= "<div class='meta'>\n";
     $surveysView .= "<span>Créé par ". $userManager->getUserById($survey->getIdAuthor())->getUserName()."</span>\n";
     $surveysView .= "</div>\n";
     $surveysView .= "<div class='description'>\n";
     $surveysView .= "<p>". $survey->getDescription() ."</p>\n";
     $surveysView .= "</div>\n";
-   // $surveysView .= "<div class='extra'> Date de fin du sondage : ". $survey->getDateFin() ." </div>\n";
+    $surveysView .= "<div class='extra'> Date de fin du sondage : ". $survey->getDateFin()->format('Y-m-d') ." </div>\n";
     $surveysView .= "</div>\n</div>\n";
 }
 
@@ -47,14 +47,13 @@ foreach ($surveys as $survey){
         
         <?php include ('header.html'); ?>
 
-
         <section class="sondages">
 
             <h1 class="ui block header">Envie de participer à un sondage ?</h1>
 
             <div class="ui items ">          
-                <?php $surveysView?>
-            </div>    
+                <?php echo $surveysView;?>
+            </div>  
 
         </section>
 
@@ -67,7 +66,6 @@ foreach ($surveys as $survey){
                 <a href="addNewSurvey.php"><button class="ui button floated right" type="button" >Créer un sondage</button></a>
             </div>
         </section>
-
 
         <?php include ('footer.html'); ?>
     </body>

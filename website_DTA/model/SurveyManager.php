@@ -6,7 +6,7 @@
  * @author Tanguy
  */
 
-//define('__ROOT__', dirname(__DIR__));
+
 
 require_once 'Survey.php';
 

@@ -1,15 +1,21 @@
 <?php 
 
-require_once 'SurveyManager.php';
-require_once 'WebsiteUserManager.php';
+define('__ROOT__', dirname(__DIR__));
 
-//Par exemple disons qu'on veut charger le sondage d'id = 2, on est arrivé sur cette page depuis la page d'index ou on avait chargé plusieurs sondages sous formes d'objets
-// on a notre objet $survey, il faut faire :
+require_once __ROOT__.'/model/SurveyManager.php';
+require_once __ROOT__.'/model/WebsiteUserManager.php';
 
-/*
- * $choices = $surveyManager->getChoicesOfSurvey($survey->idSurvey);
- * $survey->setChoices($choices);
-*/
+if(!empty($_GET["idSurvey"])){
+    $idSurvey = (int) htmlspecialchars($_GET["idSurvey"]);
+} else {
+    $errorMsg .= "La page doit connaître le sondage à afficher...<br>\n";
+}
+
+$survey = $surveyManager->getSurveyById($idSurvey);
+
+$choices = $surveyManager->getChoicesOfSurvey($idSurvey);
+$survey->setChoices($choices);
+
 
 // Il faut maintenant charger ces "choices" dans la page HTML
 ?>
@@ -36,13 +42,15 @@ require_once 'WebsiteUserManager.php';
         
         <?php include "header.html"; ?>
         
+        <!--    A REMPLACER
+        
         <h1 class="ui block header">Quel est le meilleur film de 2019 ?</h1>
         <div class="ui main text container">
         <div class="ui internally celled grid">
             <div class="row">
                 <div class="six wide column">
                     <div class="ui centered medium image">
-                        <img src="images/once_upon_a_time_affiche.jpg" alt="Poster of Once upon a time">
+                        <img src="/website_DTA/images/once_upon_a_time_affiche.jpg" alt="Poster of Once upon a time">
                     </div>
                 </div>
                 <div class="ten wide column"> 
@@ -61,7 +69,7 @@ require_once 'WebsiteUserManager.php';
                 </div>
                 <div class="six wide column">
                      <div class="ui centered medium image">
-                        <img src="images/joker_affiche.jpg" alt="Poster of Joker">
+                        <img src="/website_DTA/images/joker_affiche.jpg" alt="Poster of Joker">
                     </div>
                 </div>
             </div>
@@ -70,8 +78,7 @@ require_once 'WebsiteUserManager.php';
         
         Popularité : <div class="ui star rating" data-rating="3" ></div>
         
-       
-        
+        -->
         
         <?php include "footer.html"; ?>
       
