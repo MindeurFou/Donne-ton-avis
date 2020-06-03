@@ -92,7 +92,7 @@ if (isset($_POST["submit"])) {
     //si tout s'est bien passé, on ajoute le sondage dans la base de données et on retourne sur la page d'index
     if (empty($errorMsg)) {
         $surveyManager->addSurveyByArray($data);
-        header("Location: http://localhost/Donne/view/index.php");
+        header("Location: http://localhost/website_DTA/view/index.php");
     }
 }
 
