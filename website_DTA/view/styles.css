@@ -8,15 +8,159 @@ and open the template in the editor.
     Author     : user
 */
 
-p{
-    margin:30px;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'open sans';
+}
+.container{
+    padding: 60px 0;
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+    overflow: hidden;
+}
+title{
+    color: #642a73;
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 60px;
+}
+header{
+    width: 100%;
+    height:600px;
+    background: #bc4e9c;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, hsla(340, 95%,50%,0.459), hsla(317,45%,52%,0.664)),url(../images/portada_1.jpg);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, hsla(340, 95%,50%,0.459), hsla(317,45%,52%,0.664)),url(../images/portada_1.jpg); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+
+}
+nav{
+    text-align: left;
+    padding: 10px 20px 0 750px;
+}
+nav> a{
+    color: #fff;
+    font-weight: 300;
+    text-decoration: none;
+    margin-right: 10px;
+}
+nav > a:hover{
+    text-decoration: underline;
+}
+header .texts-header{ /*antes estaba header*/
+    display: flex;
+    height: 430px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}  
+.texts-header h1{
+    font-size: 50px;
+    color: #fff;
+}
+.texts-header h2{
+    font-size: 30px;
+    font-weight: 300;
+    color: #fff;
+}
+.wave{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
-section{
-    margin: 100px;
+/*Participer un sondage*/
+.participer un sondage{
+    background: #f2f2f2;
+}
+.container h2{
+    font-size: 30px;
+    font-weight: 300;
+    color: #000;
+    text-align: center;
+}
+.galeria-port{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.image-port{
+    width: 40%;
+    margin-bottom: 10px;
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 0 6px rgba(0, 0, 0, .5);
+}
+.image-port > img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.hover-galerie{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    transform: scale(0);
+    background: hsla(273, 91%, 27%, 0.7);
+    transition: transform .5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.hover-galerie img{
+    width: 50%;
+}
+.hover-galerie p{
+    color: #fff;
+}
+.image-port:hover .hover-galerie{
+    transform: scale(1);
+}
+/*footer*/
+footer{
+    background: #414141;
+    padding: 5px 0px 0px 0;
+    margin: auto;
+    overflow: hidden;
+}
+.container-footer{
+    display: flex;
+    width: 90%;
+    justify-content: space-around;
+    margin: auto;
+    padding-bottom: 50px;
+    border-bottom: 1px solid #ccc;
 }
 
-.main.container {
-    margin-top: 4em;
-    margin-bottom: 4em;
+.content-foo h4{
+    color: #fff;
+    border-bottom: 3px solid #af20d3;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    text-align: center;
 }
+.content-foo p{
+    color: #ccc;
+    padding: 0 0 0 0;
+    text-align: center;
+}
+.title-final{
+    text-align: center;
+    font-size: 24px;
+    margin: 20px 0 0 0;
+    color: #9e9797;
+}
+

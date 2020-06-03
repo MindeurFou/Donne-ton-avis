@@ -72,7 +72,6 @@ class Choice {
             $this->imagePath = $imagePath;
         }
     }
-
     public function setIdAuthor($val) {
         
         $id = (int) $val;
@@ -128,9 +127,20 @@ class Choice {
     public function getIdSurvey(){
         return $this->idSurvey;
     }
-    
-    
-    
+    //nouvelles fonctions
+    public function getImagePath(){
+        return $this->imagePath;
+    }
+    public function getTitle(){
+    return $this->title;
+    }
+    public function getAuthorDescription(){
+    return $this->authorDescription;
+    }
+    public function getAltDescription(){
+    return $this->altDescription;
+    }
+    //
     public function toString(){
         
         $stringObj = "";

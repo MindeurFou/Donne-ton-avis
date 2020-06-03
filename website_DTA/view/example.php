@@ -1,4 +1,4 @@
-<?php 
+ <?php 
 
 define('__ROOT__', dirname(__DIR__));
 
@@ -6,7 +6,7 @@ require_once __ROOT__.'/model/SurveyManager.php';
 require_once __ROOT__.'/model/WebsiteUserManager.php';
 
 $errorMsg="";
-//$idSurvey =1;
+$idSurvey =2;
 if(!empty($_GET["idSurvey"])){
     $idSurvey = (int) htmlspecialchars($_GET["idSurvey"]);
 } else {
@@ -39,6 +39,7 @@ foreach ( $choi as $choice){
     $surveysView .= "</div>\n</div>\n";
     $surveysView .= "</div>\n</div>\n";
 }
+
 // Il faut maintenant charger ces "choices" dans la page HTML
 ?>
 
@@ -46,23 +47,16 @@ foreach ( $choi as $choice){
 
 <html>
     <head>
-        <title>Sondage DTA</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <link href="semantic.min.css" rel="stylesheet">
+
+        <title>Bienvenue sur DTA</title>
+
+        <link href="semantic.min.css" rel="stylesheet">
         <link href="styles.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="semantic.min.css">
-        <script
-            src="https://code.jquery.com/jquery-3.1.1.min.js"
-            integrity ="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-            crossorigin="anonymous"></script>
-        <script src="semantic.min.js"></script>
-        <script>$(document).ready(function() {$(".rating").rating();});</script>
     </head>
-    
     <body>
         
-        <?php include "header.html"; ?>
         <section class="sondages">
 
             <h1 class="ui block header"><?php echo $survey->getTitle() ?></h1>
@@ -72,13 +66,7 @@ foreach ( $choi as $choice){
             </div>  
 
         </section>
-        
-        
-        <?php include "footer.html"; ?>
-      
-        
-        
+
+        <?php include ('footer.html'); ?>
     </body>
 </html>
-
-

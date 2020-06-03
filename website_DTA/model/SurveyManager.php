@@ -173,13 +173,11 @@ class SurveyManager {
         $query->bindValue(":numberParticipantsMax", $data["numberParticipantsMax"], PDO::PARAM_INT);
         $query->bindValue(":numberChoiceMax", $data["numberChoiceMax"], PDO::PARAM_INT);
         $query->bindValue(":othersCanPropose", $data["othersCanPropose"], PDO::PARAM_INT);
-        
         try {
             $query->execute();
         } catch (PDOException $ex) {
             $this->errorMsg .= "Exception handled while calling addSurveyByArray() : " . $ex->getMessage();
         }
-        
         return $this->dtaDb->query("SELECT IdSurvey FROM survey ORDER BY IdSurvey DESC LIMIT 1"); // récupère l'id de la ligne créée dans la db
     }
     
@@ -290,7 +288,7 @@ class SurveyManager {
     /**
      * 
      * @param string $title the title you choose to name your file. Keep the same pattern as all existing images in project
-     * @param string $FormName value of the attribute "name" in the HTML form
+     * @param string $name value of the attribute "name" in the HTML form
      * 
      * @return string|null a string corresponding to the realtive path of the image, or null if there wasn't any image
      */
@@ -303,11 +301,11 @@ class SurveyManager {
 
             if (in_array($fileExtension, $extensionsAllowed)) {
                 
-                $imagePath = __ROOT__ . "/images/" . $title . "." . $fileExtension;
+                $imagePath = __ROOT__ . "../images/" . $title . "." . $fileExtension;
 
                 if (move_uploaded_file($_FILES[$name]["tmp_name"], $imagePath)){
 
-                    $pos = strpos($imagePath, "\website_DTA"); // enlève la partie absolue du chemin
+                    $pos = strpos($imagePath, "\Donne"); // enlève la partie absolue du chemin
                     $imagePath = substr($imagePath, $pos);
 
                     return $imagePath;

@@ -14,6 +14,7 @@ $surveys = $surveyManager->getSurveys(0,10); // C'est un tableau de sondages
 $surveysView = "";
 
 foreach ($surveys as $survey){
+    $interval = $survey->getDateDebut()->diff($survey->getDateFin());
     $surveysView .= "<div class=\"item\">\n";
     $surveysView .= "<div class=\"image\">\n";
     $surveysView .= "<img src=\"". $survey->getImagePath() ."\">";
@@ -26,6 +27,7 @@ foreach ($surveys as $survey){
     $surveysView .= "<p>". $survey->getDescription() ."</p>\n";
     $surveysView .= "</div>\n";
     $surveysView .= "<div class='extra'> Date de fin du sondage : ". $survey->getDateFin()->format('Y-m-d') ." </div>\n";
+    $surveysView .= "<div><p>Il reste ".$interval->format('%a days')." pour que le sondage termine</p></div>";
     $surveysView .= "</div>\n</div>\n";
 }
 

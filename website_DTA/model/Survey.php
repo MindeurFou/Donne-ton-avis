@@ -235,7 +235,10 @@ class Survey {
         
         $this->choices = $choices;     
     }
-    
+    public function getChoices(){
+        
+       return $this->choices;     
+    }
     
     public function getIdSurvey(){
         return $this->idSurvey;
