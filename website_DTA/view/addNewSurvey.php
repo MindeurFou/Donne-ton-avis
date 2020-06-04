@@ -1,7 +1,7 @@
 <?php
 define('__ROOT__', dirname(__DIR__));
 
-include __ROOT__. '/model/authentication.php';
+include __ROOT__ . '/model/authentication.php';
 
 require_once __ROOT__ . '/model/SurveyManager.php';
 
@@ -16,9 +16,21 @@ $data = [
     "numberParticipants" => 0,
     "numberParticipantsMax" => 10000,
     "numberChoiceMax" => 15,
-    "othersCanPropose" => 0,
-    "choices" => array(
-        "idChoice" => 0,
+    "othersCanPropose" => 0
+];
+
+$choices = array(
+    array(
+        "idSurvey" => 0,
+        "title" => "",
+        "imagePath" => "",
+        "idAuthor" => 0,
+        "authorDescription" => "",
+        "altDescription" => "",
+        "numberOfVotes" => 0,
+        "classementPosition" => 0
+    ),
+    array(
         "idSurvey" => 0,
         "title" => "",
         "imagePath" => "",
@@ -28,7 +40,7 @@ $data = [
         "numberOfVotes" => 0,
         "classementPosition" => 0
     )
-];
+);
 
 $errorMsg = "";
 
@@ -54,8 +66,8 @@ if (isset($_POST["submit"])) {
     if ($surveyManager->isTitleUsed($data["title"])) {
         $errorMsg .= "Le titre existe déjà :( Veuillez en choisir un autre svp<br>\n";
     }
-    
-    $data["imagePath"] = SurveyManager::uploadImage($data["title"], "image"); 
+
+    $data["imagePath"] = SurveyManager::uploadImage($data["title"], "image");
 
     $data["idAuthor"] = $user->getIdUser();
 
@@ -88,10 +100,44 @@ if (isset($_POST["submit"])) {
         $data["othersCanPropose"] = 0;
     }
 
+    //management of the choices :
+
+
+    for ($i = 0; $i < $numberOfChoices; $i++) {
+
+        $choice["title"] = trim(htmlspecialchars($_POST["choiceTitle" . i]));
+
+        if (empty($data["title"])) {
+            $errorMsg .= "Le champs titre est obligatoire<br>\n";
+        } else if (strlen($data["title"]) < 2 || strlen($data["title"]) > 100) {
+            $errorMsg .= "Le champs titre doit contenir entre 2 et 100 caractères<br>\n";
+        }
+
+        $choice["imagePath"] = SurveyManager::uploadImage($choice["title"], "image" . i);
+
+        $choice["idAuthor"] = $user->getIdUser();
+
+        $choice["authorDescription"] = trim(htmlspecialchars($_POST["choiceAuthorDescription" . i]));
+
+        if (empty($choice["authorDescription"])) {
+            $errorMsg .= "Le champs Description est obligatoire<br>\n";
+        } else if (strlen($choice["authorDescription"]) < 10) {
+            $errorMsg .= "Le champs Description rentré est trop court<br>\n";
+        }
+
+        $choices[] = $choice;
+    }
+
 
     //si tout s'est bien passé, on ajoute le sondage dans la base de données et on retourne sur la page d'index
     if (empty($errorMsg)) {
-        $surveyManager->addSurveyByArray($data);
+        $idSurvey = $surveyManager->addSurveyByArray($data);
+
+        foreach ($choices as $choice) {
+            $choice["idSurvey"] = $idSurvey;
+            $surveyManager->addChoiceByArray($choice);
+        }
+
         header("Location: http://localhost/website_DTA/view/index.php");
     }
 }
@@ -113,16 +159,16 @@ if (!isset($_POST["submit"]) || !empty($errorMsg)) {
         </head>
         <body>
 
-    <?php include "header.html"; ?>
+            <?php include "header.html"; ?>
 
 
 
             <div class="ui main text container">
-    <?php
-    if (!empty($errorMsg)) {
-        echo '<div class="ui red message">' . $errorMsg . '</div>';
-    }
-    ?>
+                <?php
+                if (!empty($errorMsg)) {
+                    echo '<div class="ui red message">' . $errorMsg . '</div>';
+                }
+                ?>
                 <div class="ui segment">     
                     <h1 class="ui header">Ajout d'un nouveau sondage</h1>
                     <form class="ui form" enctype="multipart/form-data" method="POST" action="addNewSurvey.php">
@@ -138,11 +184,11 @@ if (!isset($_POST["submit"]) || !empty($errorMsg)) {
                                 <label>Catégorie</label>
                                 <select class="ui fluid dropdown" name="category">
                                     <option value="">Catégorie</option>
-    <?php
-    foreach (Survey::$categories as $value) {
-        echo "<option value= '" . $value . "'>" . $value . "</option>";
-    }
-    ?>
+                                    <?php
+                                    foreach (Survey::$categories as $value) {
+                                        echo "<option value= '" . $value . "'>" . $value . "</option>";
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>
@@ -189,20 +235,42 @@ if (!isset($_POST["submit"]) || !empty($errorMsg)) {
 
                         <h3 class="ui dividing header">Les propositions</h3>
 
+                        <div class="two fields">
+                            <div class ="field">
+                                <label>Titre</label>
+                                <input type="text" name="choiceTitle0" placeholder="Titre" value="<?php echo $choices[0]["title"]; ?>" required>
+                            </div>
 
-
-                        <div class="ui segment">
                             <div class="field">
-                                <label>Description</label>
-                                <textarea name="Proposal1Description" placeholder="Décrivez la proposition" rows="1"></textarea>
+                                <label>Image associée</label>
+                                <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+                                <input type="file"  name="image0">
                             </div>
                         </div>
 
-                        <div class="ui segment">
-                            <div class="field">
-                                <label>Description</label>
-                                <textarea name="Proposal2Description" placeholder="Décrivez la proposition" rows="1"></textarea>
+                        <div class="field">
+                            <label>Description</label>
+                            <textarea name="choiceAuthorDescription0" placeholder="Décrivez votre proposition aux autres utilisateurs !" rows="2" required><?php echo $choices[0]["authorDescription"]; ?></textarea>
+                        </div>
+
+                        <br><br>
+
+                        <div class="two fields">
+                            <div class ="field">
+                                <label>Titre</label>
+                                <input type="text" name="choiceTitle1" placeholder="Titre" value="<?php echo $choices[1]["title"]; ?>" required>
                             </div>
+
+                            <div class="field">
+                                <label>Image associée</label>
+                                <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+                                <input type="file"  name="image1">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label>Description</label>
+                            <textarea name="choiceAuthorDescription1" placeholder="Décrivez votre proposition aux autres utilisateurs !" rows="2" required><?php echo $choices[1]["authorDescription"]; ?></textarea>
                         </div>
 
 
@@ -211,7 +279,7 @@ if (!isset($_POST["submit"]) || !empty($errorMsg)) {
                 </div>
             </div>
 
-    <?php include "footer.html"; ?>
+            <?php include "footer.html"; ?>
 
 
 

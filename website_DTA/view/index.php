@@ -27,7 +27,7 @@ foreach ($surveys as $survey){
     $surveysView .= "<p>". $survey->getDescription() ."</p>\n";
     $surveysView .= "</div>\n";
     $surveysView .= "<div class='extra'> Date de fin du sondage : ". $survey->getDateFin()->format('Y-m-d') ." </div>\n";
-    $surveysView .= "<div><p>Il reste ".$interval->format('%a days')." pour que le sondage termine</p></div>";
+    $surveysView .= "<div><p>Il reste ".$interval->format('%a jours')." avant la fin du sondage </p></div>";
     $surveysView .= "</div>\n</div>\n";
 }
 
