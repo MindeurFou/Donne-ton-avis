@@ -301,11 +301,11 @@ class SurveyManager {
 
             if (in_array($fileExtension, $extensionsAllowed)) {
                 
-                $imagePath = __ROOT__ . "/images/" . $title . "." . $fileExtension;
+                $imagePath = __ROOT__ . "../images/" . $title . "." . $fileExtension;
 
                 if (move_uploaded_file($_FILES[$name]["tmp_name"], $imagePath)){
 
-                    $pos = strpos($imagePath, "\website_DTA"); // enlève la partie absolue du chemin
+                    $pos = strpos($imagePath, "\Donne_2"); // enlève la partie absolue du chemin
                     $imagePath = substr($imagePath, $pos);
 
                     return $imagePath;

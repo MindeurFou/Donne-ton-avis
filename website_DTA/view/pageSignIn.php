@@ -77,7 +77,7 @@ if (isset($_POST["submit"])) {
     if (empty($errorMsg)) {
         $idUser = $userManager->addUserByArray($data);
         $_SESSION["idUser"] = $idUser;
-        header("Location: http://localhost/website_DTA/view/index.php");
+        header("Location: http://localhost/Donne_2/view/index.php");
     }
 }
 
@@ -96,7 +96,7 @@ if (!isset($_POST["submit"]) || !empty($errorMsg)) {
         </head>
         <body>
 
-            <?php include "header.html"; ?>
+            <?php include "header_1.php"; ?>
 
 
             <div class="ui main text container">
@@ -148,7 +148,7 @@ if (!isset($_POST["submit"]) || !empty($errorMsg)) {
                 </div>
             </div>
 
-            <?php include "footer.html"; ?>
+            <?php include ('footer.html'); ?>
 
 
 

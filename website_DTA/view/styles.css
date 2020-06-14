@@ -13,16 +13,7 @@ and open the template in the editor.
     padding: 0;
     box-sizing: border-box;
 }
-body{
-    font-family: 'open sans';
-}
-.container{
-    padding: 60px 0;
-    width: 90%;
-    max-width: 1000px;
-    margin: auto;
-    overflow: hidden;
-}
+
 title{
     color: #642a73;
     font-size: 30px;
@@ -41,8 +32,7 @@ header{
 
 }
 nav{
-    text-align: left;
-    padding: 10px 20px 0 750px;
+    padding: 10px 0 0 900px;
 }
 nav> a{
     color: #fff;
@@ -129,6 +119,87 @@ header .texts-header{ /*antes estaba header*/
 .image-port:hover .hover-galerie{
     transform: scale(1);
 }
+/*Body*/
+body{
+    font-family: 'open sans';
+}
+/*Participer a un sondage*/
+.sondages{
+    margin: 50px 50px 50px 0;
+}
+
+.participer{
+    font-size: 50px;
+    margin: 0 0 50px 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+.ui.items > .item > .image:not(.ui){
+    margin: 0 0 0 100px;
+    width: 400px;
+}
+.ui.items  .item  .image{
+    height:300px;
+}
+.ui.items > .item > .content > .Ttl:not(.ui) {
+    color:black;
+    font-weight: bold;
+    margin: 10px 0 20px 120px;
+    font-size: 30px;
+}
+.ui.items  .item .meta{
+    font-size:18px;
+    font-weight: bold;
+}
+.ui.items  .item  .content p{
+    font-size:18px;
+    text-align: justify;
+}
+.ui.items  .item .extra{
+    font-size:20px;
+    color: black;
+    font-weight: bold;
+}
+.ui.items  .item  .content p1{
+    font-size:15px;
+}
+.container{
+    padding: 60px 0;
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+    overflow: hidden;
+}
+
+/*Proposer un autre sondage*/
+.creation.sondages{
+    margin: 50px 0 0 0;
+}
+.creation.sondage .sondages p{
+    margin:  0 120px 20px 120px;
+    font-size:25px;
+    text-align: center;
+    justify-content: center;
+}
+.creer{
+    font-size: 50px;
+    margin: 0 0 10px 50px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+.creation.sondage .sondages .bouton{
+    margin:0 700px;
+}
+/*PageSurvey.php*/
+.ui.items  .item  .content .Commentaire p{
+    font-size:15px;
+    text-align: justify;
+    font-weight: bold;
+}
 /*footer*/
 footer{
     background: #414141;
@@ -163,4 +234,8 @@ footer{
     margin: 20px 0 0 0;
     color: #9e9797;
 }
-
+/*PageLogin and pageSigIn*/
+.ui.text.container{
+    margin-top:80px;
+    margin-bottom: 90px;
+}

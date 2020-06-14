@@ -138,7 +138,7 @@ if (isset($_POST["submit"])) {
             $surveyManager->addChoiceByArray($choice);
         }
 
-        header("Location: http://localhost/website_DTA/view/index.php");
+        header("Location: http://localhost/Donne_2/view/index.php");
     }
 }
 
@@ -159,7 +159,7 @@ if (!isset($_POST["submit"]) || !empty($errorMsg)) {
         </head>
         <body>
 
-            <?php include "header.html"; ?>
+            <?php include "header_1.php"; ?>
 
 
 

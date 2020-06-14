@@ -21,22 +21,17 @@ $survey->setChoices($choices);
 $surveysView = "";
 $choi= $survey->getChoices();
 foreach ( $choi as $choice){
-    $surveysView .= "<div class=\"item\">\n";
-    $surveysView .= "<div class=\"image\">\n";
+    $surveysView .= "<div class='item'>\n";
+    $surveysView .= "<div class='image'>\n";
     $surveysView .= "<img src=\"". $choice->getImagePath() ."\">";
     $surveysView .= "\n</div>\n<div class='content' >\n";
-    $surveysView .= "<h1 class='header'>". $choice->getTitle() ."</h1>\n";
-    $surveysView .= "<div class='description'>\n";
-    $surveysView .= "<p>". $choice->getAuthorDescription() ."</p>\n";
-    $surveysView .= "</div>\n";
+    $surveysView .= "<a class='Ttl'>". $choice->getTitle() ."</a>\n";
     $surveysView .= "<div class='description'>\n";
     $surveysView .= "<p>". $choice->getAltDescription() ."</p>\n";
     $surveysView .= "</div>\n";
-    $surveysView .= "<div> <button class='ui button'>Voter</button>";
+    $surveysView .= "<div class='Commentaire'>\n";
+    $surveysView .= "<p>Commentaire: ". $choice->getAuthorDescription() ."</p>\n";
     $surveysView .= "</div>\n";
-    $surveysView .= "<div class='ui progress'>\n";
-    $surveysView .= "<div class='bar'>\n<div class='progress'></div>\n";
-    $surveysView .= "</div>\n</div>\n";
     $surveysView .= "</div>\n</div>\n";
 }
 // Il faut maintenant charger ces "choices" dans la page HTML
@@ -62,10 +57,10 @@ foreach ( $choi as $choice){
     
     <body>
         
-        <?php include "header.html"; ?>
+        <?php include "header_1.php"; ?>
         <section class="sondages">
 
-            <h1 class="ui block header"><?php echo $survey->getTitle() ?></h1>
+            <h1 class="participer"><?php echo $survey->getTitle() ?></h1>
 
             <div class="ui items ">          
                 <?php echo $surveysView;?>
