@@ -44,7 +44,7 @@ if (isset($_POST["submit"])) {
             $errorMsg .= "session créée !";
             
             
-            header("Location: http://localhost/Donne_2/view/index.php");
+            header("Location: http://localhost/website_DTA/view/index.php");
             exit();
         } else {
             $errorMsg .= "L'authentification a échouée<br>\n";
