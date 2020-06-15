@@ -138,7 +138,7 @@ if (isset($_POST["submit"])) {
             $surveyManager->addChoiceByArray($choice);
         }
 
-        header("Location: http://localhost/Donne_2/view/index.php");
+        header("Location: http://localhost/website_DTA/view/index.php");
     }
 }
 
