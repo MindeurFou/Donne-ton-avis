@@ -77,7 +77,7 @@ if (isset($_POST["submit"])) {
     if (empty($errorMsg)) {
         $idUser = $userManager->addUserByArray($data);
         $_SESSION["idUser"] = $idUser;
-        header("Location: http://localhost/Donne_2/view/index.php");
+        header("Location: http://localhost/website_DTA/view/index.php");
     }
 }
 
