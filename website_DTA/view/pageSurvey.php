@@ -19,8 +19,9 @@ $choices = $surveyManager->getChoicesOfSurvey($idSurvey);
 $survey->setChoices($choices);
 //partie ajoutée
 $surveysView = "";
-$choi= $survey->getChoices();
-foreach ( $choi as $choice){
+
+foreach ( $choices as $choice){
+    
     $surveysView .= "<div class='item'>\n";
     $surveysView .= "<div class='image'>\n";
     $surveysView .= "<img src=\"". $choice->getImagePath() ."\">";
@@ -34,7 +35,7 @@ foreach ( $choi as $choice){
     $surveysView .= "</div>\n";
     $surveysView .= "</div>\n</div>\n";
 }
-// Il faut maintenant charger ces "choices" dans la page HTML
+
 ?>
 
 <!DOCTYPE html>
@@ -53,11 +54,14 @@ foreach ( $choi as $choice){
             crossorigin="anonymous"></script>
         <script src="semantic.min.js"></script>
         <script>$(document).ready(function() {$(".rating").rating();});</script>
+        
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     </head>
     
     <body>
         
         <?php include "header_1.php"; ?>
+        
         <section class="sondages">
 
             <h1 class="participer"><?php echo $survey->getTitle() ?></h1>
@@ -67,6 +71,8 @@ foreach ( $choi as $choice){
             </div>  
 
         </section>
+        
+        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
         
         
         <?php include "footer.html"; ?>
