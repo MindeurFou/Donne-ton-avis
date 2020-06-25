@@ -6,8 +6,6 @@
  * @author Tanguy
  */
 
-
-
 require_once 'Survey.php';
 
 class SurveyManager {
@@ -320,7 +318,7 @@ class SurveyManager {
 
 }
 
-//============== Peut-être à enlever et à écrire en début de chaque fichier le nécessitant
+
 try {
     $dtaDb = new PDO("mysql:host=localhost;dbname=dtadb;charset=utf8", "root", "", array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 } catch (PDOException $ex) {

@@ -116,31 +116,41 @@ class Choice {
        }
     }
     
+    
     public function getNumberOfVotes(){
         return $this->numberOfVotes;
     }
+    
     
     public function getClassementPosition(){
         return $this->classementPosition;
     }
     
+    
     public function getIdSurvey(){
         return $this->idSurvey;
     }
-    //nouvelles fonctions
+    
+    
     public function getImagePath(){
         return $this->imagePath;
     }
+    
+    
     public function getTitle(){
-    return $this->title;
+        return $this->title;
     }
+    
+    
     public function getAuthorDescription(){
-    return $this->authorDescription;
+        return $this->authorDescription;
     }
+    
     public function getAltDescription(){
-    return $this->altDescription;
+        return $this->altDescription;
     }
-    //
+    
+   
     public function toString(){
         
         $stringObj = "";
@@ -151,6 +161,7 @@ class Choice {
         
         return $stringObj;
     }
+    
 
     private function checkString($key, $value) {
 
@@ -167,7 +178,5 @@ class Choice {
             return false;
         }
         
-    }
-    
-    
+    } 
 }

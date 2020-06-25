@@ -25,6 +25,7 @@ $votes = [];
 $datap = "";
 $botton="";
 $i = 0;
+
 foreach ($choi as $choice) {
     $surveysView .= "<div class='item'>\n";
     $surveysView .= "<div class='image'>\n";

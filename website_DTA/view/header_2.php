@@ -1,9 +1,5 @@
 <?php
 
-session_start();
-
-//define('__ROOT__', dirname(__DIR__));
-
 require_once __ROOT__ . '/model/WebsiteUser.php';
 require_once __ROOT__ . '/model/WebsiteUserManager.php';
 

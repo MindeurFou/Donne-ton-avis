@@ -16,13 +16,15 @@ $survey = $surveyManager->getSurveyById($idSurvey);
 
 $choices = $surveyManager->getChoicesOfSurvey($idSurvey);
 $survey->setChoices($choices);
-//partie ajoutée
+
 $surveysView = "";
-$choi = $survey->getChoices();
+
 //créaton de tables
 $ttitle = [];
+$datap = "";
 $i = 0;
-foreach ($choi as $choice) {
+
+foreach ($choices as $choice) {
     $surveysView .= "<div class='item'>\n";
     $surveysView .= "<div class='image'>\n";
     $surveysView .= "<img src=\"" . $choice->getImagePath() . "\">";
@@ -44,7 +46,7 @@ foreach ($choi as $choice) {
     $datap .= "{y: " . $votes[$i] . ", label: " . "'" . $ttitle[$i] . "'" . "}," . "\n";
     $i = $i + 1;
 }
-// Il faut maintenant charger ces "choices" dans la page HTML
+
 ?>
 
 <!DOCTYPE html>
@@ -112,7 +114,8 @@ foreach ($choi as $choice) {
                 chart.render();
 
             };</script>
-    <div id="chartContainer" style="height: 50px; width: 100%;"></div> 
+                            <br><br>
+                            
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     
     

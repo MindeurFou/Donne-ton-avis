@@ -74,6 +74,4 @@ class Message {
         
         return $stringObject;
     }
-    
-    
 }

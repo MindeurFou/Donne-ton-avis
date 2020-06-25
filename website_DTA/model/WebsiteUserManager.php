@@ -142,8 +142,5 @@ try {
 
 $userManager = new WebsiteUserManager($dtaDb);
 
-/*
-$user = $userManager->getUserById(6);
 
-echo $user->toString();*/
 

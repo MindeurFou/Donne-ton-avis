@@ -1,9 +1,5 @@
 <?php
 
-session_start();
-
-//define('__ROOT__', dirname(__DIR__));
-
 require_once __ROOT__ . '/model/WebsiteUser.php';
 require_once __ROOT__ . '/model/WebsiteUserManager.php';
 
@@ -30,8 +26,8 @@ $montre= "<header>"
             }
             $montre.="</div>"
             ."<section class='texts-header'>"
-             ."<h1>Creez ou participez d'un sondage</h1>"
-             . "<h2>Ne restez pas avec le désir</h2>"
+             ."<h1>Créez ou participez à un sondage</h1>"
+             . "<h2>Laissez vous tenter !</h2>"
             ."</section>"
             ."<div class='wave' style='height: 150px; overflow: hidden;'>"
                     ."<svg viewBox='0 0 500 150' preserveAspectRatio='none' style='height: 100%; width: 100%;'>"
@@ -39,4 +35,5 @@ $montre= "<header>"
                     ."</path>"
                     ."</svg></div>"
 ."</header>";
+            
 echo $montre;

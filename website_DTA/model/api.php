@@ -1,10 +1,9 @@
 <?php
 
-// pour récupérer un survey sous forme JSON :
-// faire une requete GET avec JQuery avec comme URI : api.php?idSurvey=x    avec x l'id du survey 
-
 header("Content-Type:application/json");
+
 require_once 'SurveyManager.php';
+
 if(!empty($_GET["idSurvey"])){
     $idSurvey = htmlspecialchars($_GET["idSurvey"]);
     
@@ -22,16 +21,13 @@ if(!empty($_GET["idSurvey"])){
     reponse(400, "Invalid Request", NULL);
 }
 
-function reponse($status, $status_message, $data1){
-    header ("HTTP/1.1 " . $status);
+function reponse($status, $status_message, $data){
     
-    //$data = array("key" => "value");
-    
-    //$data = json_encode($tab);
-    
+    header("HTTP/1.1 " . $status);
+       
     $reponse["status"] = $status;
     $reponse["status_message"] = $status_message;
-    $reponse["data"] = $data1;
+    $reponse["data"] = $data;
     
     $json_response = json_encode($reponse);
     
