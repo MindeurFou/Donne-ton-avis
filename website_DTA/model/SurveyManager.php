@@ -301,7 +301,7 @@ class SurveyManager {
 
             if (in_array($fileExtension, $extensionsAllowed)) {
                 
-                $imagePath = __ROOT__ . "/images/" . $title . "." . $fileExtension;
+                $imagePath = __ROOT__ . "../images/" . $title . "." . $fileExtension;
 
                 if (move_uploaded_file($_FILES[$name]["tmp_name"], $imagePath)){
 

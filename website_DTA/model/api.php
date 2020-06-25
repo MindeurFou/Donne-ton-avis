@@ -5,7 +5,6 @@
 
 header("Content-Type:application/json");
 require_once 'SurveyManager.php';
-
 if(!empty($_GET["idSurvey"])){
     $idSurvey = htmlspecialchars($_GET["idSurvey"]);
     
@@ -23,12 +22,16 @@ if(!empty($_GET["idSurvey"])){
     reponse(400, "Invalid Request", NULL);
 }
 
-function reponse($status, $status_message, $data){
+function reponse($status, $status_message, $data1){
     header ("HTTP/1.1 " . $status);
+    
+    //$data = array("key" => "value");
+    
+    //$data = json_encode($tab);
     
     $reponse["status"] = $status;
     $reponse["status_message"] = $status_message;
-    $reponse["data"] = $data;
+    $reponse["data"] = $data1;
     
     $json_response = json_encode($reponse);
     

@@ -96,7 +96,7 @@ if (!isset($_POST["submit"]) || !empty($errorMsg)) {
         </head>
         <body>
 
-            <?php include "header_1.php"; ?>
+            <?php include "header_2.php"; ?>
 
 
             <div class="ui main text container">

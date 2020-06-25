@@ -13,9 +13,10 @@ if(isset($_SESSION["idUser"])){
 } 
 
 
-$montre= "<header>"
+$montre= "<div class='header'>"
           ." <div class='ui fixed inverted main menu'>"
-          ."<div class='header item'>DONNE TON AVIS</div>"
+          ."<div class='"
+        . " item'>DONNE TON AVIS</div>"
           ."<a class='item'>Categories</a>"
           ."<a class='item'>Histoire du site</a>"
           ."<a class='item'>Contact</a>";
@@ -26,17 +27,9 @@ $montre= "<header>"
             </nav>" ; 
             }
             else {
-            $montre.="<a class='right item'>Bienvenue ". $name  ."</a>";
+            $montre.="<a class=' right item'>Bienvenue ". $name  ."</a>";
             }
             $montre.="</div>"
-            ."<section class='texts-header'>"
-             ."<h1>Creez ou participez d'un sondage</h1>"
-             . "<h2>Ne restez pas avec le désir</h2>"
-            ."</section>"
-            ."<div class='wave' style='height: 150px; overflow: hidden;'>"
-                    ."<svg viewBox='0 0 500 150' preserveAspectRatio='none' style='height: 100%; width: 100%;'>"
-                    ."<path d='M0.00,49.99 C169.29,150.29 349.20,-49.99 500.00,49.99 L500.00,150.00 L0.00,150.00 Z' style='stroke: none; fill: #fff;'>"
-                    ."</path>"
-                    ."</svg></div>"
-."</header>";
+            
+."</div>";
 echo $montre;

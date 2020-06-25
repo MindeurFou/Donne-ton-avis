@@ -1,10 +1,18 @@
-window.onload = function () {
+    function reqListener () {
+      console.log(this.responseText);
+    }
+    //il faut installer 
+    var oReq = new XMLHttpRequest(); // New request object
     
-/*var dataChoice = [
-    //traitement sur array
-]*/
-	
-var chart = new CanvasJS.Chart("chartContainer", {
+    oReq.onload = function() {
+        // This is where you handle what to do with the response.
+        // The actual data is found on this.responseText
+        console.log(this.responseText); // Will alert: 42
+    };
+    oReq.open("get", "../model/api.php?idSurvey=1", true);
+    oReq.send();
+
+/*var chart = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,
 	
 	title:{
@@ -24,12 +32,13 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		color: "#014D65",
 		dataPoints: [
                     
-			{ y: 10, label: "Chandler" },
+			{ y: 50, label: "Chandler" },
 			{ y: 25, label: "Joey" }
 		]
 	}]
 });
 chart.render();
 
-};
+};*/
+
 

@@ -39,6 +39,26 @@ $choices = array(
         "altDescription" => "",
         "numberOfVotes" => 0,
         "classementPosition" => 0
+    ),
+    array(
+        "idSurvey" => 0,
+        "title" => "",
+        "imagePath" => "",
+        "idAuthor" => 0,
+        "authorDescription" => "",
+        "altDescription" => "",
+        "numberOfVotes" => 0,
+        "classementPosition" => 0
+    ),
+    array(
+        "idSurvey" => 0,
+        "title" => "",
+        "imagePath" => "",
+        "idAuthor" => 0,
+        "authorDescription" => "",
+        "altDescription" => "",
+        "numberOfVotes" => 0,
+        "classementPosition" => 0
     )
 );
 
@@ -156,10 +176,14 @@ if (!isset($_POST["submit"]) || !empty($errorMsg)) {
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link rel="stylesheet" type="text/css" href="semantic.min.css">
             <link href="styles.css" rel="stylesheet">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <!-- Il faut ajouter les libraries de jquery-->
+            <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+            <script src="semantic.min.js" type="text/javascript"></script>
         </head>
         <body>
 
-            <?php include "header_1.php"; ?>
+            <?php include "header_2.php"; ?>
 
 
 
@@ -235,6 +259,14 @@ if (!isset($_POST["submit"]) || !empty($errorMsg)) {
 
                         <h3 class="ui dividing header">Les propositions</h3>
 
+                        <div class="ui top attached tabular menu">
+                            <a class="active item" data-tab="first">Première</a>
+                            <a class="item" data-tab="second">Deuxième</a>
+                            <a class="item" data-tab="three">Troixième</a>
+                            <a class="item" data-tab="four">Quatrième</a>
+                        </div>
+                        <div class="ui bottom attached active tab segment" data-tab="first">
+
                         <div class="two fields">
                             <div class ="field">
                                 <label>Titre</label>
@@ -254,7 +286,9 @@ if (!isset($_POST["submit"]) || !empty($errorMsg)) {
                         </div>
 
                         <br><br>
-
+                        </div>
+                        
+                        <div class="ui bottom attached tab segment" data-tab="second">
                         <div class="two fields">
                             <div class ="field">
                                 <label>Titre</label>
@@ -272,8 +306,73 @@ if (!isset($_POST["submit"]) || !empty($errorMsg)) {
                             <label>Description</label>
                             <textarea name="choiceAuthorDescription1" placeholder="Décrivez votre proposition aux autres utilisateurs !" rows="2" required><?php echo $choices[1]["authorDescription"]; ?></textarea>
                         </div>
+                        </div>
+                        <div class="ui bottom attached active tab segment" data-tab="three">
 
+                        <div class="two fields">
+                            <div class ="field">
+                                <label>Titre</label>
+                                <input type="text" name="choiceTitle0" placeholder="Titre" value="<?php echo $choices[2]["title"]; ?>" required>
+                            </div>
 
+                            <div class="field">
+                                <label>Image associée</label>
+                                <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+                                <input type="file"  name="image0">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label>Description</label>
+                            <textarea name="choiceAuthorDescription0" placeholder="Décrivez votre proposition aux autres utilisateurs !" rows="2" required><?php echo $choices[2]["authorDescription"]; ?></textarea>
+                        </div>
+
+                        <br><br>
+                        </div>
+                        <div class="ui bottom attached active tab segment" data-tab="four">
+
+                        <div class="two fields">
+                            <div class ="field">
+                                <label>Titre</label>
+                                <input type="text" name="choiceTitle0" placeholder="Titre" value="<?php echo $choices[3]["title"]; ?>" required>
+                            </div>
+
+                            <div class="field">
+                                <label>Image associée</label>
+                                <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+                                <input type="file"  name="image0">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label>Description</label>
+                            <textarea name="choiceAuthorDescription0" placeholder="Décrivez votre proposition aux autres utilisateurs !" rows="2" required><?php echo $choices[3]["authorDescription"]; ?></textarea>
+                        </div>
+
+                        <br><br>
+                        </div>
+                        <div class="ui bottom attached active tab segment" data-tab="five">
+
+                        <div class="two fields">
+                            <div class ="field">
+                                <label>Titre</label>
+                                <input type="text" name="choiceTitle0" placeholder="Titre" value="<?php echo $choices[4]["title"]; ?>" required>
+                            </div>
+
+                            <div class="field">
+                                <label>Image associée</label>
+                                <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+                                <input type="file"  name="image0">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label>Description</label>
+                            <textarea name="choiceAuthorDescription0" placeholder="Décrivez votre proposition aux autres utilisateurs !" rows="2" required><?php echo $choices[4]["authorDescription"]; ?></textarea>
+                        </div>
+
+                        <br><br>
+                        </div>
                         <button class="ui button" type="submit" name="submit">Enregistrer</button>
                     </form>
                 </div>
@@ -281,9 +380,9 @@ if (!isset($_POST["submit"]) || !empty($errorMsg)) {
 
             <?php include "footer.html"; ?>
 
-
-
+            
         </body>
+        <script>$('.tabular.menu .item').tab({history:false});</script>
     </html>
 
     <?php

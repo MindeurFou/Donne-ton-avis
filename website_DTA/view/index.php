@@ -12,9 +12,9 @@ $surveys = $surveyManager->getSurveys(0,10); // C'est un tableau de sondages
 //Il faut maintenant les afficher sur la page HTML
 
 $surveysView = "";
-
+$datetime1 = new DateTime(date('Y-m-d'));
 foreach ($surveys as $survey){
-    $interval = $survey->getDateDebut()->diff($survey->getDateFin());
+    $interval = $datetime1->diff($survey->getDateFin());
     $surveysView .= "<div class='item'>\n";
     $surveysView .= "<div class='image'>\n";
     $surveysView .= "<img src=\"". $survey->getImagePath() ."\">";
@@ -44,11 +44,14 @@ foreach ($surveys as $survey){
 
         <link href="semantic.min.css" rel="stylesheet">
         <link href="styles.css" rel="stylesheet">
+        <script>
+        $('.menu .item').tab();
+        </script>
     </head>
     <body>
         
-        <?php include ('header.html'); ?>
-
+        <?php  include 'header_1.php'; ?>
+        
         <section class="sondages">
             <h1 class="participer">Envie de participer à un sondage ?</h1>
             <div class="ui items ">          
@@ -63,10 +66,10 @@ foreach ($surveys as $survey){
                 <p>Vous avez parcouru tout les sondages du site mais toujours pas de traces de celui qui trottait dans votre tête ?
                     Vous pouvez toujours créer le vôtre dans cette section. C'est simple et rapide : en quelques clics vous pouvez parametrer la manière
                     dont les gens interagiront avec vôtre sondage.</p>
-                <a class="bouton" href="addNewSurvey.php"><button class="ui button floated right" type="button" >Créer un sondage</button></a>
+                <a class="bouton" href="addNewSurvey.php"><button class=" ui button floated right" type="button" >Créer un sondage</button></a>
             </div>
         </section>
-
-        <?php include ('footer.html'); ?>
+      <?php include ('footer.html'); ?>  
     </body>
+    
 </html>
